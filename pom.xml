@@ -12,6 +12,7 @@
     <modules>
         <module>inputs</module>
         <module>server</module>
+        <module>models</module>
     </modules>
 
     <dependencies>
