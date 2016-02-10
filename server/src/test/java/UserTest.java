@@ -5,11 +5,13 @@ import java.net.UnknownHostException;
  */
 public class UserTest {
 
-    public static void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args) throws Exception {
 
         User user1 = new User("cloeamoroso", "motdepasse");
         String mdpEncrypt = user1.encryptMdp(user1.getMdp());
-        System.out.println("Password encrypted : " + mdpEncrypt);
+
+        User user2 = new User("andredupond", "mdp");
+        mdpEncrypt = user2.encryptMdp(user2.getMdp());
 
     }
 
