@@ -1,7 +1,7 @@
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-public class gameTest {
+public class GameTest {
 
     static Database bdd = new Database();
 

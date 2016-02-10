@@ -3,7 +3,7 @@ import java.net.UnknownHostException;
 /**
  * Created by CLOE on 27/01/2016.
  */
-public class userTest {
+public class UserTest {
 
     public static void main(String[] args) throws UnknownHostException {
 
