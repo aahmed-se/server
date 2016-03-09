@@ -29,9 +29,9 @@ public class Amqp {
     private ConnectionFactory factory;
 
     private Amqp() throws Exception {
-        uri = System.getenv("cloud_amqp").split(";")[0];
-        username = System.getenv("cloud_amqp").split(";")[1];
-        password = System.getenv("cloud_amqp").split(";")[2];
+        uri = "amqp://10.31.4.1/collectorQueue";
+        username = "collectorUser";
+        password = "BigDataAmqp";
 
         //initialize channel
         factory = new ConnectionFactory();
@@ -46,7 +46,7 @@ public class Amqp {
     }
 
     public static Amqp get() {
-        if(instance.equals(null)){
+        if(instance == null){
             try {
                 new Amqp();
             } catch (Exception e) {
