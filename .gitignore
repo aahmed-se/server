@@ -9,3 +9,4 @@ dependency-reduced-pom.xml
 test_amqp.iml
 */target/
 *.iml
+log

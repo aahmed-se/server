@@ -30,7 +30,7 @@ public class RequestSender {
         ObjectMapper mapper = new ObjectMapper();
         String jsonToSend = mapper.writeValueAsString(request);
         channel.basicPublish("", Amqp.QUEUE_TASK, null, jsonToSend.getBytes());
-        log.error(jsonToSend);
+        log.debug(jsonToSend);
 
         System.exit(0);
     }
