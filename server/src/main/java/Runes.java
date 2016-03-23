@@ -1,9 +1,10 @@
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Runes {
+public class Runes implements DataProcessing<Runes> {
 
     private int _id;
     private double id;
@@ -66,4 +67,9 @@ public class Runes {
     public void setRune(ArrayList<Rune> rune) {
         this.rune = rune;
     }
+
+    public Field[] getDeclaredFields() {
+        return this.getDeclaredFields();
+    }
+
 }

@@ -1,11 +1,14 @@
+import com.mongodb.BasicDBObject;
+
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
+import java.lang.reflect.Field;
 import java.security.*;
 
 /**
  * Created by CLOE on 27/01/2016.
  */
-public class User {
+public class User implements DataProcessing<User> {
 
     private String login;
     private String password;
@@ -51,6 +54,29 @@ public class User {
 
     public void setMdp(String password) {
         this.password = password;
+    }
+
+    public Field[] getDeclaredFields() {
+        return this.getDeclaredFields();
+    }
+
+    public void insert() {
+        BasicDBObject document = new BasicDBObject();
+        Field[] fields = this.getDeclaredFields();
+        for (Field f : fields) {
+           // document.put(f.getName());
+        }
+        document.put("name", "lokesh");
+        document.put("website", "howtodoinjava.com");
+
+        BasicDBObject documentDetail = new BasicDBObject();
+        documentDetail.put("addressLine1", "Sweet Home");
+        documentDetail.put("addressLine2", "Karol Bagh");
+        documentDetail.put("addressLine3", "New Delhi, India");
+
+        document.put("address", documentDetail);
+
+        //collection.insert(document);
     }
 
 }

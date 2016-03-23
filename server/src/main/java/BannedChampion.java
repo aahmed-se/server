@@ -1,7 +1,9 @@
+import java.lang.reflect.Field;
+
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class BannedChampion {
+public class BannedChampion implements DataProcessing<BannedChampion> {
 
     private double pickTurn;
     private double championId;
@@ -35,5 +37,9 @@ public class BannedChampion {
 
     public void setTeamId(double teamId) {
         this.teamId = teamId;
+    }
+
+    public Field[] getDeclaredFields() {
+        return this.getDeclaredFields();
     }
 }

@@ -1,9 +1,10 @@
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Masteries {
+public class Masteries implements DataProcessing<Masteries> {
 
     private int _id;
     private double id;
@@ -55,4 +56,9 @@ public class Masteries {
     public void setDescription(ArrayList<String> description) {
         this.description = description;
     }
+
+    public Field[] getDeclaredFields() {
+        return this.getDeclaredFields();
+    }
+
 }

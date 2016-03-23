@@ -1,7 +1,9 @@
+import java.lang.reflect.Field;
+
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Item {
+public class Item implements DataProcessing<Item> {
 
     private int _id;
     private double id;
@@ -67,4 +69,9 @@ public class Item {
     public void setPlainText(String plainText) {
         this.plainText = plainText;
     }
+
+    public Field[] getDeclaredFields() {
+        return this.getDeclaredFields();
+    }
+
 }

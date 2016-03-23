@@ -1,3 +1,6 @@
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
@@ -32,12 +35,17 @@ public class GameTest {
 
         Game g = new Game(1,5,"mode", 1, bannedChampions, "type", 1, observers, 1, 1, participants, "platformId");
 
-       /* bdd.initBDD()..save(s);
-        bdd.initBDD().save(s2);
-        bdd.initBDD().save(s3);
-        bdd.initBDD().save(s4);
+        com.mongodb.DB database = bdd.initBDD();
 
-        bdd.initBDD().save(g);*/
+        BasicDBObject doc1 = new BasicDBObject();
+        doc1.put("user",s);
+        doc1.put("user",s2);
+        doc1.put("user",s3);
+        doc1.put("user",s4);
+        DBCollection items = bdd.initBDD().getCollection("user");
+        items.insert(doc1);
+
+        //bdd.initBDD().save(g);
     }
 
 }

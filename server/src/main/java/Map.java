@@ -1,7 +1,9 @@
+import java.lang.reflect.Field;
+
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Map {
+public class Map implements DataProcessing<Map> {
 
     private int _id;
     private String mapId;
@@ -46,4 +48,9 @@ public class Map {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    public Field[] getDeclaredFields() {
+        return this.getDeclaredFields();
+    }
+
 }

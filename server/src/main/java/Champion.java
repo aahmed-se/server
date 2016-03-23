@@ -1,7 +1,9 @@
+import java.lang.reflect.Field;
+
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Champion {
+public class Champion implements DataProcessing<Champion> {
 
     private int _id;
     private double id;
@@ -55,5 +57,9 @@ public class Champion {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Field[] getDeclaredFields() {
+        return this.getDeclaredFields();
     }
 }

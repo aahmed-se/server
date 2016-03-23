@@ -1,7 +1,9 @@
+import java.lang.reflect.Field;
+
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Summoner {
+public class Summoner implements DataProcessing<Summoner> {
 
     private int _id;
     private double id;
@@ -66,4 +68,9 @@ public class Summoner {
     public void setRevisionDate(double revisionDate) {
         this.revisionDate = revisionDate;
     }
+
+    public Field[] getDeclaredFields() {
+        return this.getDeclaredFields();
+    }
+
 }
