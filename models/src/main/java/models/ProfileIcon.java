@@ -1,9 +1,11 @@
+package models;
+
 import java.lang.reflect.Field;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class ProfileIcon implements DataProcessing<ProfileIcon> {
+public class ProfileIcon {
 
     private int _id;
     private int id;
@@ -37,10 +39,6 @@ public class ProfileIcon implements DataProcessing<ProfileIcon> {
 
     public void setBlob(String blob) {
         this.blob = blob;
-    }
-
-    public Field[] getDeclaredFields() {
-        return this.getDeclaredFields();
     }
 
 }

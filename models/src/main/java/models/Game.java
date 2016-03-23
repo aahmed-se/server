@@ -1,11 +1,11 @@
-import java.lang.reflect.Field;
+package models;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Clo� on 18/11/2015.
  */
-public class Game implements DataProcessing<Game> {
+public class Game {
 
     private int id;
     private double gameLength;
@@ -144,9 +144,5 @@ public class Game implements DataProcessing<Game> {
 
     public void setPlatformId(String platformId) {
         this.platformId = platformId;
-    }
-
-    public Field[] getDeclaredFields() {
-        return this.getDeclaredFields();
     }
 }

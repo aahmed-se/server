@@ -1,22 +1,24 @@
-import com.mongodb.BasicDBObject;
+package models;
 
-import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
+import com.mongodb.BasicDBObject;
+import manager.CRUD;
+
 import java.lang.reflect.Field;
 import java.security.*;
 
 /**
  * Created by CLOE on 27/01/2016.
  */
-public class User implements DataProcessing<User> {
+public class User extends CRUD {
 
     private String login;
     private String password;
     private String key = Long.toHexString(Double.doubleToLongBits(Math.random()));
 
-    public User(String login, String password) {
+    public User(String login, String password) throws Exception {
         this.login = login;
-        this.password = password;
+        this.password = encryptMdp(password);
+        this.saveObject(this);
     }
 
     public String encryptMdp(String password) throws Exception {
@@ -54,29 +56,6 @@ public class User implements DataProcessing<User> {
 
     public void setMdp(String password) {
         this.password = password;
-    }
-
-    public Field[] getDeclaredFields() {
-        return this.getDeclaredFields();
-    }
-
-    public void insert() {
-        BasicDBObject document = new BasicDBObject();
-        Field[] fields = this.getDeclaredFields();
-        for (Field f : fields) {
-           // document.put(f.getName());
-        }
-        document.put("name", "lokesh");
-        document.put("website", "howtodoinjava.com");
-
-        BasicDBObject documentDetail = new BasicDBObject();
-        documentDetail.put("addressLine1", "Sweet Home");
-        documentDetail.put("addressLine2", "Karol Bagh");
-        documentDetail.put("addressLine3", "New Delhi, India");
-
-        document.put("address", documentDetail);
-
-        //collection.insert(document);
     }
 
 }

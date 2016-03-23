@@ -1,9 +1,11 @@
+package models;
+
 import java.lang.reflect.Field;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class SummonerSpell implements DataProcessing<SummonerSpell> {
+public class SummonerSpell {
 
     private int _id;
     private String name;
@@ -67,10 +69,6 @@ public class SummonerSpell implements DataProcessing<SummonerSpell> {
 
     public void setKey(String key) {
         this.key = key;
-    }
-
-    public Field[] getDeclaredFields() {
-        return this.getDeclaredFields();
     }
 
 }

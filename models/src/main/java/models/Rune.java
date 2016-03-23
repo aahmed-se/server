@@ -1,9 +1,11 @@
+package models;
+
 import java.lang.reflect.Field;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Rune implements DataProcessing<Rune> {
+public class Rune {
 
     private String tier;
     private String type;
@@ -27,10 +29,6 @@ public class Rune implements DataProcessing<Rune> {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Field[] getDeclaredFields() {
-        return this.getDeclaredFields();
     }
 
 }

@@ -16,7 +16,6 @@ import com.rabbitmq.client.Channel;
 public class RequestSender {
     private static final Logger log = LoggerFactory.getLogger(RequestSender.class);
 
-
     public static void main(String[] args) throws Exception {
         //Connection to the amqp server
         Amqp amqp = Amqp.get();

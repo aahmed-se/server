@@ -1,31 +1,27 @@
+package models;
+
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Runes implements DataProcessing<Runes> {
+public class Item {
 
     private int _id;
     private double id;
     private String name;
+    private String group;
     private String description;
-    private ArrayList<Rune> rune;
+    private String plainText;
 
-    public Runes(int _id, double id, String name, String description, ArrayList<Rune> rune) {
+
+    public Item(int _id, double id, String name, String group, String description, String plainText) {
         this._id = _id;
         this.id = id;
         this.name = name;
+        this.group = group;
         this.description = description;
-        this.rune = rune;
-    }
-
-    public Runes(int _id, double id, String name, String description) {
-        this._id = _id;
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.rune = new ArrayList<Rune>();
+        this.plainText = plainText;
     }
 
     public int get_id() {
@@ -52,6 +48,14 @@ public class Runes implements DataProcessing<Runes> {
         this.name = name;
     }
 
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -60,16 +64,12 @@ public class Runes implements DataProcessing<Runes> {
         this.description = description;
     }
 
-    public ArrayList<Rune> getRune() {
-        return rune;
+    public String getPlainText() {
+        return plainText;
     }
 
-    public void setRune(ArrayList<Rune> rune) {
-        this.rune = rune;
-    }
-
-    public Field[] getDeclaredFields() {
-        return this.getDeclaredFields();
+    public void setPlainText(String plainText) {
+        this.plainText = plainText;
     }
 
 }
