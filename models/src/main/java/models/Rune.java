@@ -1,3 +1,7 @@
+package models;
+
+import java.lang.reflect.Field;
+
 /**
  * Created by CLOE on 13/01/2016.
  */
@@ -26,4 +30,5 @@ public class Rune {
     public void setType(String type) {
         this.type = type;
     }
+
 }

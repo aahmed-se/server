@@ -1,3 +1,7 @@
+package models;
+
+import java.lang.reflect.Field;
+
 /**
  * Created by CLOE on 13/01/2016.
  */
@@ -36,4 +40,5 @@ public class ProfileIcon {
     public void setBlob(String blob) {
         this.blob = blob;
     }
+
 }

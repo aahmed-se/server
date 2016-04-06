@@ -1,19 +1,24 @@
-import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
+package models;
+
+import com.mongodb.BasicDBObject;
+import manager.CRUD;
+
+import java.lang.reflect.Field;
 import java.security.*;
 
 /**
  * Created by CLOE on 27/01/2016.
  */
-public class User {
+public class User extends CRUD {
 
     private String login;
     private String password;
     private String key = Long.toHexString(Double.doubleToLongBits(Math.random()));
 
-    public User(String login, String password) {
+    public User(String login, String password) throws Exception {
         this.login = login;
-        this.password = password;
+        this.password = encryptMdp(password);
+        this.saveObject(this);
     }
 
     public String encryptMdp(String password) throws Exception {

@@ -1,7 +1,13 @@
+package models;
+
+import manager.CRUD;
+
+import java.lang.reflect.Field;
+
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Summoner {
+public class Summoner extends CRUD {
 
     private int _id;
     private double id;
@@ -17,6 +23,7 @@ public class Summoner {
         this.profileIconId = profileIconId;
         this.summonerLevel = summonerLevel;
         this.revisionDate = revisionDate;
+        this.saveObject(this);
     }
 
     public int get_id() {
@@ -66,4 +73,9 @@ public class Summoner {
     public void setRevisionDate(double revisionDate) {
         this.revisionDate = revisionDate;
     }
+
+    public Field[] getDeclaredFields() {
+        return this.getDeclaredFields();
+    }
+
 }

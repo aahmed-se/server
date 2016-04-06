@@ -1,5 +1,6 @@
+package models;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Clo� on 18/11/2015.

@@ -1,3 +1,5 @@
+package models;
+
 import java.util.ArrayList;
 
 /**
@@ -66,4 +68,5 @@ public class Runes {
     public void setRune(ArrayList<Rune> rune) {
         this.rune = rune;
     }
+
 }

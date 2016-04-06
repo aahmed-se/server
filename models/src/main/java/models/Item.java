@@ -1,3 +1,7 @@
+package models;
+
+import java.lang.reflect.Field;
+
 /**
  * Created by CLOE on 13/01/2016.
  */
@@ -67,4 +71,5 @@ public class Item {
     public void setPlainText(String plainText) {
         this.plainText = plainText;
     }
+
 }
