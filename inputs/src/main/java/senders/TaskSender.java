@@ -20,15 +20,17 @@ public class TaskSender {
         //Connection to the amqp server
         Amqp amqp = Amqp.get();
         Channel channel = Amqp.get().getChannel();
-        channel.queueDeclare(Amqp.QUEUE_TASK,false,false,false,null);
 
-        Task request = new Task(SummonerResource.getSummoners(Region.euw,new Integer[]{22253079,22169683}), Priority.LOW);
+        for (int i = 0; i < 20; i++) {
+            Task request = new Task(SummonerResource.getSummoners(Region.euw,new Integer[]{22253079,22169683}), Priority.LOW);
 
-        //publish the json to the queue
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonToSend = mapper.writeValueAsString(request);
-        channel.basicPublish("", Amqp.QUEUE_TASK, null, jsonToSend.getBytes());
-        log.debug(jsonToSend);
+            //publish the json to the queue
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonToSend = mapper.writeValueAsString(request);
+            channel.basicPublish("", Amqp.QUEUE_TASK, null, jsonToSend.getBytes());
+            log.debug(jsonToSend);
+        }
+
 
         System.exit(0);
     }

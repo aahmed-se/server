@@ -6,9 +6,6 @@ import com.rabbitmq.client.ConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
-
 /**
  * Created by Thomas on 19/11/2015.
  */
@@ -41,6 +38,8 @@ public class Amqp {
         connection = factory.newConnection();
 
         channel = connection.createChannel();
+        channel.queueDeclare(Amqp.QUEUE_TASK,false,false,false,null);
+        channel.queueDeclare(Amqp.QUEUE_MODEL,false,false,false,null);
 
         instance = this;
     }

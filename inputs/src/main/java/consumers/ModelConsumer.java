@@ -29,7 +29,7 @@ public class ModelConsumer extends DefaultConsumer {
     }
 
     public static ModelConsumer get(Channel channel){
-        if(instance.equals(null)){
+        if(instance == null){
             try {
                 new ModelConsumer(channel);
             } catch (IOException e) {
@@ -40,7 +40,7 @@ public class ModelConsumer extends DefaultConsumer {
     }
 
     public void handleConsumeOk(String consumerTag) {
-        log.debug("A new message is going to be consume.");
+        log.debug("Awaiting to consume messages.");
     }
 
     public void handleCancelOk(String consumerTag) {
