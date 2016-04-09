@@ -21,7 +21,7 @@ public class TaskSender {
         Amqp amqp = Amqp.get();
         Channel channel = Amqp.get().getChannel();
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 1; i++) {
             Task request = new Task(SummonerResource.getSummoners(Region.euw,new Integer[]{22253079,22169683}), Priority.LOW);
 
             //publish the json to the queue
