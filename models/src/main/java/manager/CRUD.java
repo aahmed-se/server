@@ -9,15 +9,15 @@ public class CRUD {
     private com.mongodb.DB database;
 
     public CRUD() {
-        this.bdd = new Database();
-        this.database = bdd.initBDD();
+        this.bdd = Database.get();
+        this.database = bdd.database;
     }
 
-    public void saveObject() {
+    public void save() {
         BasicDBObject doc = new BasicDBObject();
         doc.put(Object.class.getName(),this);
         System.out.println(Object.class.getSimpleName());
-        DBCollection items = bdd.initBDD().getCollection(Object.class.getSimpleName());
+        DBCollection items = database.getCollection(Object.class.getSimpleName());
         items.insert(doc);
     }
 

@@ -3,7 +3,7 @@ package utils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import manager.CRUD;
+import models.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import responses.Response;
@@ -22,11 +22,11 @@ public class Harvester {
             Class<T> objectClass = (Class<T>) Class.forName(node.get("class").asText());
             T object = mapper.readValue(node.get("object").asText(), objectClass);
             log.debug("Object receive : {} from {}", object, objectClass);
-            CRUD objectModel = object.castToModel();
-            log.debug("Object saved from {} ",objectModel.getClass());
-            objectModel.saveObject();
+            Model objectModel = object.castToModel();
+            log.debug("Object saved from {} into id {}",objectModel.getClass(),objectModel.save());
         } catch (Exception e) {
-            e.printStackTrace();
+            if(log.isDebugEnabled())e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 }

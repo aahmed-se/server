@@ -1,6 +1,6 @@
 package models;
 
-import manager.CRUD;
+import org.bson.types.ObjectId;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -8,16 +8,22 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by CLOE on 27/01/2016.
  */
-public class User extends CRUD {
+public class User extends Model {
 
     private String login;
     private String password;
     private String key = Long.toHexString(Double.doubleToLongBits(Math.random()));
 
     public User(String login, String password) throws Exception {
+        super(new ObjectId());
         this.login = login;
         this.password = encryptMdp(password);
-        this.saveObject();
+    }
+
+    public User(ObjectId _id,String login, String password) throws Exception {
+        super(_id);
+        this.login = login;
+        this.password = encryptMdp(password);
     }
 
     public String encryptMdp(String password) throws Exception {

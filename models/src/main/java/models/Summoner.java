@@ -1,34 +1,35 @@
 package models;
 
-import manager.CRUD;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
 import responses.SummonerResponse;
 
 import java.lang.reflect.Field;
-import java.math.BigInteger;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Summoner extends CRUD {
+@Entity(value = "summoner")
+public class Summoner extends Model {
 
-    private int _id;
     private double id;
     private String name;
     private double profileIconId;
     private double summonerLevel;
-    private BigInteger revisionDate;
+    private long revisionDate;
 
-    public Summoner(int _id, double id, String name, double profileIconId, double summonerLevel, BigInteger revisionDate) {
-        this._id = _id;
+    public Summoner(ObjectId _id, double id, String name, double profileIconId, double summonerLevel, long revisionDate) {
+        super(_id);
         this.id = id;
         this.name = name;
         this.profileIconId = profileIconId;
         this.summonerLevel = summonerLevel;
         this.revisionDate = revisionDate;
-        this.saveObject();
+        this.save();
     }
 
-    public Summoner(double id, String name, double profileIconId, double summonerLevel, BigInteger revisionDate) {
+    public Summoner(double id, String name, double profileIconId, double summonerLevel, long revisionDate) {
+        super(new ObjectId());
         this.id = id;
         this.name = name;
         this.profileIconId = profileIconId;
@@ -38,14 +39,6 @@ public class Summoner extends CRUD {
 
     public Summoner(SummonerResponse response){
         this(response.id,response.name,response.profileIconId,response.summonerLevel,response.revisionDate);
-    }
-
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
     }
 
     public double getId() {
@@ -80,11 +73,11 @@ public class Summoner extends CRUD {
         this.summonerLevel = summonerLevel;
     }
 
-    public BigInteger getRevisionDate() {
+    public long getRevisionDate() {
         return revisionDate;
     }
 
-    public void setRevisionDate(BigInteger revisionDate) {
+    public void setRevisionDate(long revisionDate) {
         this.revisionDate = revisionDate;
     }
 

@@ -2,7 +2,7 @@ package responses;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import deserializers.TaskDeserializer;
-import manager.CRUD;
+import models.Model;
 import models.Priority;
 import models.Region;
 
@@ -21,7 +21,7 @@ public class TaskResponse extends Response {
     public Priority priority;
 
     @Override
-    public <T extends CRUD> T castToModel() {
+    public <T extends Model> T castToModel() {
         return null;
     }
 }
