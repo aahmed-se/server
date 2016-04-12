@@ -1,10 +1,9 @@
 package models;
 
-import com.mongodb.BasicDBObject;
 import manager.CRUD;
 
-import java.lang.reflect.Field;
-import java.security.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by CLOE on 27/01/2016.
@@ -18,7 +17,7 @@ public class User extends CRUD {
     public User(String login, String password) throws Exception {
         this.login = login;
         this.password = encryptMdp(password);
-        this.saveObject(this);
+        this.saveObject();
     }
 
     public String encryptMdp(String password) throws Exception {

@@ -4,11 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import models.Priority;
 import models.Region;
-import models.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import resources.SummonerResource;
 import utils.Amqp;
+import utils.Task;
 
 /**
  * Created by Thomas on 20/11/2015.

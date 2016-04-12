@@ -13,9 +13,9 @@ public class CRUD {
         this.database = bdd.initBDD();
     }
 
-    public void saveObject(Object myObject) {
+    public void saveObject() {
         BasicDBObject doc = new BasicDBObject();
-        doc.put(Object.class.getName(),myObject);
+        doc.put(Object.class.getName(),this);
         System.out.println(Object.class.getSimpleName());
         DBCollection items = bdd.initBDD().getCollection(Object.class.getSimpleName());
         items.insert(doc);

@@ -1,8 +1,10 @@
 package models;
 
 import manager.CRUD;
+import responses.SummonerResponse;
 
 import java.lang.reflect.Field;
+import java.math.BigInteger;
 
 /**
  * Created by CLOE on 13/01/2016.
@@ -14,16 +16,28 @@ public class Summoner extends CRUD {
     private String name;
     private double profileIconId;
     private double summonerLevel;
-    private double revisionDate;
+    private BigInteger revisionDate;
 
-    public Summoner(int _id, double id, String name, double profileIconId, double summonerLevel, double revisionDate) {
+    public Summoner(int _id, double id, String name, double profileIconId, double summonerLevel, BigInteger revisionDate) {
         this._id = _id;
         this.id = id;
         this.name = name;
         this.profileIconId = profileIconId;
         this.summonerLevel = summonerLevel;
         this.revisionDate = revisionDate;
-        this.saveObject(this);
+        this.saveObject();
+    }
+
+    public Summoner(double id, String name, double profileIconId, double summonerLevel, BigInteger revisionDate) {
+        this.id = id;
+        this.name = name;
+        this.profileIconId = profileIconId;
+        this.summonerLevel = summonerLevel;
+        this.revisionDate = revisionDate;
+    }
+
+    public Summoner(SummonerResponse response){
+        this(response.id,response.name,response.profileIconId,response.summonerLevel,response.revisionDate);
     }
 
     public int get_id() {
@@ -66,11 +80,11 @@ public class Summoner extends CRUD {
         this.summonerLevel = summonerLevel;
     }
 
-    public double getRevisionDate() {
+    public BigInteger getRevisionDate() {
         return revisionDate;
     }
 
-    public void setRevisionDate(double revisionDate) {
+    public void setRevisionDate(BigInteger revisionDate) {
         this.revisionDate = revisionDate;
     }
 
@@ -78,4 +92,15 @@ public class Summoner extends CRUD {
         return this.getDeclaredFields();
     }
 
+
+    @Override
+    public String toString() {
+        return "Summoner{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", profileIconId='" + profileIconId + '\'' +
+                ", revisionDate=" + revisionDate +
+                ", summonerLevel=" + summonerLevel +
+                '}';
+    }
 }
