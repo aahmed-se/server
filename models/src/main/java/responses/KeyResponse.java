@@ -1,6 +1,6 @@
 package responses;
 
-import models.Model;
+import mongo.Model;
 
 /**
  * Created by thomas on 10/03/16.

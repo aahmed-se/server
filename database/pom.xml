@@ -9,19 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>models</artifactId>
+    <artifactId>database</artifactId>
+
     <dependencies>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.6.3</version>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.2.2</version>
         </dependency>
+
         <dependency>
-            <groupId>com.ynov.laboDev</groupId>
-            <artifactId>database</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.mongodb.morphia</groupId>
+            <artifactId>morphia</artifactId>
+            <version>1.1.1</version>
         </dependency>
-
     </dependencies>
-
 </project>

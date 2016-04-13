@@ -25,6 +25,7 @@
         <module>inputs</module>
         <module>server</module>
         <module>models</module>
+        <module>database</module>
     </modules>
 
     <dependencies>

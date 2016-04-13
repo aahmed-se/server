@@ -1,10 +1,10 @@
 package models;
 
+import mongo.Model;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import responses.SummonerResponse;
-
-import java.lang.reflect.Field;
 
 /**
  * Created by CLOE on 13/01/2016.
@@ -17,28 +17,31 @@ public class Summoner extends Model {
     private double profileIconId;
     private double summonerLevel;
     private long revisionDate;
+    @Embedded
+    private Region region;
 
-    public Summoner(ObjectId _id, double id, String name, double profileIconId, double summonerLevel, long revisionDate) {
+    public Summoner(ObjectId _id, double id, String name, double profileIconId, double summonerLevel, long revisionDate, Region region) {
         super(_id);
         this.id = id;
         this.name = name;
         this.profileIconId = profileIconId;
         this.summonerLevel = summonerLevel;
         this.revisionDate = revisionDate;
-        this.save();
+        this.region = region;
     }
 
-    public Summoner(double id, String name, double profileIconId, double summonerLevel, long revisionDate) {
+    public Summoner(double id, String name, double profileIconId, double summonerLevel, long revisionDate,Region region) {
         super(new ObjectId());
         this.id = id;
         this.name = name;
         this.profileIconId = profileIconId;
         this.summonerLevel = summonerLevel;
         this.revisionDate = revisionDate;
+        this.region = region;
     }
 
     public Summoner(SummonerResponse response){
-        this(response.id,response.name,response.profileIconId,response.summonerLevel,response.revisionDate);
+        this(response.id,response.name,response.profileIconId,response.summonerLevel,response.revisionDate,response.region);
     }
 
     public double getId() {
@@ -80,11 +83,6 @@ public class Summoner extends Model {
     public void setRevisionDate(long revisionDate) {
         this.revisionDate = revisionDate;
     }
-
-    public Field[] getDeclaredFields() {
-        return this.getDeclaredFields();
-    }
-
 
     @Override
     public String toString() {

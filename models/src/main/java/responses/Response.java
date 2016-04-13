@@ -1,6 +1,6 @@
 package responses;
 
-import models.Model;
+import mongo.Model;
 import org.mongodb.morphia.annotations.Entity;
 
 /**

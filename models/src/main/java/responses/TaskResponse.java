@@ -2,9 +2,9 @@ package responses;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import deserializers.TaskDeserializer;
-import models.Model;
 import models.Priority;
 import models.Region;
+import mongo.Model;
 
 
 /**
