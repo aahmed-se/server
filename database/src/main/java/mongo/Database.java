@@ -28,7 +28,7 @@ public class Database {
         MongoClient mongo;
 
         morphia = new Morphia();
-        mongo = new MongoClient("127.0.0.1");
+        mongo = new MongoClient("192.168.1.17");
         database = mongo.getDatabase("dfp");
         datastore = morphia.createDatastore(mongo, "dfp");
     }

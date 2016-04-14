@@ -14,6 +14,8 @@ import utils.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -37,16 +39,35 @@ public class TaskSender {
             }
             JSONArray jsonArray = new JSONArray(aString);
 
+            List<Integer> euw = new ArrayList<>();
+            List<Integer> na= new ArrayList<>();
+            Task task;
+            ObjectMapper mapper = new ObjectMapper();
+
             for(int j = 0;i < jsonArray.length();j++) {
                 JSONObject aJsonKey = jsonArray.getJSONObject(j);
-
-                Task task = new Task(SummonerResource.getSummoners(Region.valueOf(aJsonKey.getString("id_region")),new Integer[]{aJsonKey.getInt("id-lol")}), Priority.LOW);
-
-                //publish the json to the queue
-                ObjectMapper mapper = new ObjectMapper();
+                if(aJsonKey.getString("id_region") == "euw"){
+                    euw.add(aJsonKey.getInt("id-lol"));
+                    if(euw.size() == 10 ) {
+                        task = new Task(SummonerResource.getSummoners(Region.valueOf(aJsonKey.getString("id_region")),new Integer[]{}), Priority.LOW);
+                        channel.basicPublish("", Amqp.QUEUE_TASK, null, mapper.writeValueAsBytes(task));
+                        euw = new ArrayList<>();
+                    }
+                }else{
+                    na.add(aJsonKey.getInt("id-lol"));
+                    if(na.size()==10){
+                        task = new Task(SummonerResource.getSummoners(Region.valueOf(aJsonKey.getString("id_region")),(Integer[])na.toArray()), Priority.LOW);
+                        channel.basicPublish("", Amqp.QUEUE_TASK, null, mapper.writeValueAsBytes(task));
+                        na = new ArrayList<>();
+                    }
+                }
+                task = new Task(SummonerResource.getSummoners(Region.euw,(Integer[])euw.toArray()), Priority.LOW);
                 channel.basicPublish("", Amqp.QUEUE_TASK, null, mapper.writeValueAsBytes(task));
-                log.debug("Sent {}", task.toString());
+                task = new Task(SummonerResource.getSummoners(Region.na,(Integer[])na.toArray()), Priority.LOW);
+                channel.basicPublish("", Amqp.QUEUE_TASK, null, mapper.writeValueAsBytes(task));
+
             }
+
 
         }
 
