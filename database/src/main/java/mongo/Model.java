@@ -21,6 +21,9 @@ public abstract class Model extends Document{
     @Id
     protected ObjectId _id;
 
+    public Model(){
+
+    };
     public Model(ObjectId _id) {
         this._id = _id;
     }
@@ -28,6 +31,7 @@ public abstract class Model extends Document{
     public <T extends Model> ObjectId save(){
         String collection = this.getClass().getAnnotation(Entity.class).value();
         if(collection != null){
+            _id = this.find();
             if(_id == null){
                 _id = new ObjectId();
             }
@@ -38,6 +42,9 @@ public abstract class Model extends Document{
         throw new AnnotationFormatError("Missing annotation entity on the model " + this.getClass());
     }
 
+    public abstract ObjectId find();
 
-
+    public ObjectId get_id() {
+        return _id;
+    }
 }

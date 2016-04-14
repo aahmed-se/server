@@ -23,7 +23,8 @@ public class Harvester {
             T object = mapper.readValue(node.get("object").asText(), objectClass);
             log.debug("Object receive : {} from {}", object, objectClass);
             Model objectModel = object.castToModel();
-            log.debug("Object saved from {} into id {}",objectModel.getClass(),objectModel.save());
+            Object id = objectModel.save();
+            log.debug("Object saved from {} into id {}",objectModel.getClass(),id);
         } catch (Exception e) {
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());

@@ -1,5 +1,6 @@
 package models;
 
+import mongo.Database;
 import mongo.Model;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
@@ -9,7 +10,7 @@ import responses.SummonerResponse;
 /**
  * Created by CLOE on 13/01/2016.
  */
-@Entity(value = "summoner")
+@Entity(value = "summoner", noClassnameStored=true)
 public class Summoner extends Model {
 
     private double id;
@@ -19,6 +20,9 @@ public class Summoner extends Model {
     private long revisionDate;
     @Embedded
     private Region region;
+
+    public Summoner() {
+    }
 
     public Summoner(ObjectId _id, double id, String name, double profileIconId, double summonerLevel, long revisionDate, Region region) {
         super(_id);
@@ -93,5 +97,15 @@ public class Summoner extends Model {
                 ", revisionDate=" + revisionDate +
                 ", summonerLevel=" + summonerLevel +
                 '}';
+    }
+
+    @Override
+    public ObjectId find() {
+        Summoner summoner = Database.get().datastore
+                .find(Summoner.class)
+                .filter("id =",this.id)
+                .filter("region =",this.region).get();
+        if(summoner != null) return summoner.get_id();
+        return null;
     }
 }

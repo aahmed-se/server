@@ -1,6 +1,5 @@
 package responses;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import models.Region;
 import models.Summoner;
 
@@ -14,11 +13,22 @@ public class SummonerResponse extends Response{
     public Integer profileIconId;
     public long revisionDate;
     public Integer summonerLevel;
-    @JsonIgnore
     public Region region;
 
     @Override
     public Summoner castToModel() {
         return new Summoner(this);
+    }
+
+    @Override
+    public String toString() {
+        return "SummonerResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", profileIconId=" + profileIconId +
+                ", revisionDate=" + revisionDate +
+                ", summonerLevel=" + summonerLevel +
+                ", region=" + region +
+                '}';
     }
 }

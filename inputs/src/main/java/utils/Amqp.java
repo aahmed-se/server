@@ -49,6 +49,7 @@ public class Amqp {
             try {
                 new Amqp();
             } catch (Exception e) {
+                if(log.isDebugEnabled()) e.printStackTrace();
                 log.error("An exception has been thrown '{}', {}",e.getClass(),e.getMessage());
             }
         }

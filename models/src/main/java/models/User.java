@@ -64,4 +64,8 @@ public class User extends Model {
         this.password = password;
     }
 
+    @Override
+    public ObjectId find() {
+        return null;
+    }
 }
