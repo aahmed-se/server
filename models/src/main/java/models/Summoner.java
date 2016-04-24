@@ -1,7 +1,7 @@
 package models;
 
-import mongo.Database;
-import mongo.Model;
+import mongoClient.Database;
+import mongoClient.Model;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;

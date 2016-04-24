@@ -3,8 +3,12 @@ package utils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import models.Priority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Thomas on 19/11/2015.
@@ -12,7 +16,9 @@ import org.slf4j.LoggerFactory;
 public class Amqp {
     private static final Logger log = LoggerFactory.getLogger(Amqp.class);
 
-    public final static String QUEUE_TASK = "tasks";
+    public final static String QUEUE_TASK_HIGH = "tasks_"+ Priority.HIGH;
+    public final static String QUEUE_TASK_MEDIUM = "tasks_"+ Priority.MEDIUM;
+    public final static String QUEUE_TASK_LOW = "tasks_"+ Priority.LOW;
     public final static String QUEUE_MODEL = "models";
 
     //Singleton
@@ -26,7 +32,7 @@ public class Amqp {
     private ConnectionFactory factory;
 
     private Amqp() throws Exception {
-        uri = "amqp://127.0.0.1/collectorQueue";
+        uri = "amqp://192.168.1.17/collectorQueue";
         username = "collectorUser";
         password = "BigDataAmqp";
 
@@ -38,7 +44,17 @@ public class Amqp {
         connection = factory.newConnection();
 
         channel = connection.createChannel();
-        channel.queueDeclare(Amqp.QUEUE_TASK,false,false,false,null);
+        Map<String, Object> args = new HashMap<>();
+
+        args.put("x-max-priority", Priority.HIGH.getIndex());
+        channel.queueDeclare(Amqp.QUEUE_TASK_HIGH,false,false,false,args);
+
+        args.put("x-max-priority", Priority.MEDIUM.getIndex());
+        channel.queueDeclare(Amqp.QUEUE_TASK_MEDIUM,false,false,false,args);
+
+        args.put("x-max-priority", Priority.LOW.getIndex());
+        channel.queueDeclare(Amqp.QUEUE_TASK_LOW,false,false,false,args);
+
         channel.queueDeclare(Amqp.QUEUE_MODEL,false,false,false,null);
 
         instance = this;

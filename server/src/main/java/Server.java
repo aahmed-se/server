@@ -1,18 +1,23 @@
 import consumers.ModelConsumer;
-import mongo.Database;
-import utils.Amqp;
+import mongoClient.Database;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Thomas on 06/04/2016.
  */
 public class Server {
+    final static Logger log = LoggerFactory.getLogger(Server.class);
 
     public static void main(String[] args) {
         try {
             Database.get();
-            ModelConsumer.get(Amqp.get().getChannel());
+
+            ModelConsumer.init();
+
         } catch (Exception e) {
-            e.printStackTrace();
+            if(log.isDebugEnabled())e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 }

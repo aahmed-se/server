@@ -1,6 +1,6 @@
 package models;
 
-import mongo.Model;
+import mongoClient.Model;
 import org.bson.types.ObjectId;
 
 import java.security.MessageDigest;

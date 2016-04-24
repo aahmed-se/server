@@ -1,4 +1,4 @@
-package mongo;
+package mongoClient;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
@@ -16,6 +16,8 @@ public class Database {
     private static final Logger log = LoggerFactory.getLogger(Database.class);
     private static Database ourInstance = new Database();
 
+    public final Morphia morphia;
+    public MongoClient mongoClient;
     public MongoDatabase database;
     public Datastore datastore;
 
@@ -24,13 +26,12 @@ public class Database {
     }
 
     private Database() {
-        Morphia morphia;
-        MongoClient mongo;
 
         morphia = new Morphia();
-        mongo = new MongoClient("127.0.0.1");
-        database = mongo.getDatabase("dfp");
-        datastore = morphia.createDatastore(mongo, "dfp");
+        morphia.mapPackage("models.Summoner");
+        mongoClient = new MongoClient("192.168.1.17");
+        database = mongoClient.getDatabase("dfp");
+        datastore = morphia.createDatastore(mongoClient, "dfp");
     }
 
 

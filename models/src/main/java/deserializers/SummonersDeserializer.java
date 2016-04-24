@@ -25,11 +25,6 @@ public class SummonersDeserializer extends JsonDeserializer<SummonerResponse[]>{
         JsonNode node = p.getCodec().readTree(p);
         List<SummonerResponse> responses = new ArrayList<>();
 
-        if(node.get("Status") != null) {
-            JsonNode error =node.get("Status");
-            throw new IOException(error.get("status_code").asText() + " code thrown. Error : " + error.get("message").asText());
-        }
-
         ObjectMapper mapper = new ObjectMapper();
 
         for(JsonNode summoner : node){

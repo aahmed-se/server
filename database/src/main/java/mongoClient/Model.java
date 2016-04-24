@@ -1,4 +1,4 @@
-package mongo;
+package mongoClient;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;

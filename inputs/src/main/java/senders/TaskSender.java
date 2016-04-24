@@ -28,8 +28,8 @@ public class TaskSender {
         //Connection to the amqp server
         Amqp amqp = Amqp.get();
         Channel channel = amqp.getChannel();
+        ObjectMapper mapper = new ObjectMapper();
 
-        for (int i = 0; i < 1; i++) {
             File fileKey = new File("./inputs/src/main/resources/ids.json");
             String aString = "";
             try {
@@ -44,33 +44,34 @@ public class TaskSender {
             Integer[] euwArray = new Integer[10];
             Integer[] naArray = new Integer[10];
             Task task;
-            ObjectMapper mapper = new ObjectMapper();
 
-            for(int j = 0;i < 100;j++) {
-                JSONObject aJsonKey = jsonArray.getJSONObject(j);
-                if(aJsonKey.getString("id_region") == "euw"){
-                    euw.add(aJsonKey.getInt("id-lol"));
+            for(int j = 0;j < jsonArray.length();j++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(j);
+                if(jsonObject.getString("id_region").equals("euw")){
+                    euw.add(jsonObject.getInt("id_lol"));
                     if(euw.size() == 10 ) {
-                        task = new Task(SummonerResource.getSummoners(Region.valueOf(aJsonKey.getString("id_region")),euw.toArray(euwArray)), Priority.LOW);
-                        channel.basicPublish("", Amqp.QUEUE_TASK, null, mapper.writeValueAsBytes(task));
+                        task = new Task(SummonerResource.getSummoners(Region.valueOf(jsonObject.getString("id_region")),euw.toArray(euwArray)), Priority.LOW);
+                        channel.basicPublish("", Amqp.QUEUE_TASK_LOW, null, mapper.writeValueAsBytes(task));
+                        log.debug("task {} sent",task);
                         euw = new ArrayList<>();
                     }
                 }else{
-                    na.add(aJsonKey.getInt("id-lol"));
+                    na.add(jsonObject.getInt("id_lol"));
                     if(na.size()==10){
-                        task = new Task(SummonerResource.getSummoners(Region.valueOf(aJsonKey.getString("id_region")),na.toArray(naArray)), Priority.LOW);
-                        channel.basicPublish("", Amqp.QUEUE_TASK, null, mapper.writeValueAsBytes(task));
+                        task = new Task(SummonerResource.getSummoners(Region.valueOf(jsonObject.getString("id_region")),na.toArray(naArray)), Priority.LOW);
+                        channel.basicPublish("", Amqp.QUEUE_TASK_LOW, null, mapper.writeValueAsBytes(task));
+                        log.debug("task {} sent",task);
                         na = new ArrayList<>();
                     }
                 }
-                task = new Task(SummonerResource.getSummoners(Region.euw,euw.toArray(euwArray)), Priority.LOW);
-                channel.basicPublish("", Amqp.QUEUE_TASK, null, mapper.writeValueAsBytes(task));
-                task = new Task(SummonerResource.getSummoners(Region.na,na.toArray(naArray)), Priority.LOW);
-                channel.basicPublish("", Amqp.QUEUE_TASK, null, mapper.writeValueAsBytes(task));
-
             }
-
-
+        if(euw.size()>0) {
+            task = new Task(SummonerResource.getSummoners(Region.euw, euw.toArray(new Integer[euw.size()])), Priority.LOW);
+            channel.basicPublish("", Amqp.QUEUE_TASK_LOW, null, mapper.writeValueAsBytes(task));
+        }
+        if(na.size()>0) {
+            task = new Task(SummonerResource.getSummoners(Region.na, na.toArray(new Integer[na.size()])), Priority.LOW);
+            channel.basicPublish("", Amqp.QUEUE_TASK_LOW, null, mapper.writeValueAsBytes(task));
         }
 
         System.exit(0);
