@@ -1,4 +1,4 @@
-package mongoClient;
+package mongo;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
@@ -28,8 +28,9 @@ public class Database {
     private Database() {
 
         morphia = new Morphia();
+
         morphia.mapPackage("models.Summoner");
-        mongoClient = new MongoClient("192.168.1.17");
+        mongoClient = new MongoClient("127.0.0.1");
         database = mongoClient.getDatabase("dfp");
         datastore = morphia.createDatastore(mongoClient, "dfp");
     }

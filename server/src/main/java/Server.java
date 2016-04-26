@@ -1,7 +1,8 @@
 import consumers.ModelConsumer;
-import mongoClient.Database;
+import mongo.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.Harvester;
 
 /**
  * Created by Thomas on 06/04/2016.
@@ -14,6 +15,8 @@ public class Server {
             Database.get();
 
             ModelConsumer.init();
+            Thread threadHarvester = new Thread(Harvester.get());
+            threadHarvester.start();
 
         } catch (Exception e) {
             if(log.isDebugEnabled())e.printStackTrace();

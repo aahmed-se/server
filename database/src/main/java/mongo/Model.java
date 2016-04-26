@@ -1,4 +1,4 @@
-package mongoClient;
+package mongo;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -7,13 +7,11 @@ import org.mongodb.morphia.annotations.Id;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.annotation.AnnotationFormatError;
-
 /**
  * Created by thomas on 09/04/16.
  * TODO should be implemented by all model
  */
-@Entity
+@Entity(noClassnameStored = true)
 public abstract class Model extends Document{
 
     private static final Logger log = LoggerFactory.getLogger(Model.class);
@@ -28,7 +26,7 @@ public abstract class Model extends Document{
         this._id = _id;
     }
 
-    public <T extends Model> ObjectId save(){
+    public synchronized <T extends Model> ObjectId save(){
         String collection = this.getClass().getAnnotation(Entity.class).value();
         if(collection != null){
             _id = this.find();
@@ -39,7 +37,7 @@ public abstract class Model extends Document{
 
             return _id;
         }
-        throw new AnnotationFormatError("Missing annotation entity on the model " + this.getClass());
+        return null;
     }
 
     public abstract ObjectId find();

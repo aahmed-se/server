@@ -9,5 +9,8 @@
         <Root level="debug">
             <AppenderRef ref="Console"/>
         </Root>
+        <logger name="org.mongodb" level="warn">
+            <AppenderRef ref="Console" />
+        </logger>
     </Loggers>
 </Configuration>

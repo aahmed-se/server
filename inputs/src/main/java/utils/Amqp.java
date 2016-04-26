@@ -32,7 +32,7 @@ public class Amqp {
     private ConnectionFactory factory;
 
     private Amqp() throws Exception {
-        uri = "amqp://192.168.1.17/collectorQueue";
+        uri = "amqp://127.0.0.1/collectorQueue";
         username = "collectorUser";
         password = "BigDataAmqp";
 

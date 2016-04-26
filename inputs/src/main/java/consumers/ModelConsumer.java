@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.rabbitmq.client.*;
-import mongoClient.Model;
-import org.bson.types.ObjectId;
+import mongo.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import responses.Response;
 import utils.Amqp;
+import utils.Harvester;
 
 import java.io.IOException;
 
@@ -20,6 +20,7 @@ public class ModelConsumer extends DefaultConsumer{
     private static final Logger log = LoggerFactory.getLogger(ModelConsumer.class);
 
     private static ModelConsumer instance;
+
 
     private ModelConsumer(Channel channel ) throws Exception {
         super(channel);
@@ -68,8 +69,8 @@ public class ModelConsumer extends DefaultConsumer{
             Response response = mapper.readValue(node.get("object").asText(), responseClass);
             log.debug("Object receive : {} from {}", response, responseClass);
             Model model = response.castToModel();
-            ObjectId id = model.save();
-            log.debug("Object saved from {} into id {}",model.getClass(),id);
+
+            Harvester.get().addModel(model);
         } catch (Exception e) {
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
