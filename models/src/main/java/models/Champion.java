@@ -1,32 +1,38 @@
 package models;
 
-import java.lang.reflect.Field;
+import mongo.Model;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+
+import java.util.List;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Champion {
+@Entity(value = "champion", noClassnameStored = true)
+public class Champion extends Model {
 
-    private int _id;
-    private double id;
+    private int id;
     private String key;
     private String name;
     private String title;
+    @Embedded
+    private List<Skin> skins;
 
-    public Champion(int _id, double id, String key, String name, String title) {
-        this._id = _id;
+    public Champion(String _id, int id, String key, String name, String title) {
+        super(_id);
         this.id = id;
         this.key = key;
         this.name = name;
         this.title = title;
     }
 
-    public int get_id() {
-        return _id;
+    public Champion() {
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    @Override
+    public Champion find() {
+        return null;
     }
 
     public double getId() {
@@ -59,5 +65,24 @@ public class Champion {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<Skin> getSkins() {
+        return skins;
+    }
+
+    public void setSkins(List<Skin> skins) {
+        this.skins = skins;
+    }
+
+    @Override
+    public String toString() {
+        return "Champion{" +
+                "id=" + id +
+                ", key='" + key + '\'' +
+                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                ", skins=" + skins +
+                '}';
     }
 }

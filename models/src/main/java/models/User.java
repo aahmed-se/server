@@ -1,7 +1,6 @@
 package models;
 
 import mongo.Model;
-import org.bson.types.ObjectId;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,12 +15,12 @@ public class User extends Model {
     private String key = Long.toHexString(Double.doubleToLongBits(Math.random()));
 
     public User(String login, String password) throws Exception {
-        super(new ObjectId());
+        super();
         this.login = login;
         this.password = encryptMdp(password);
     }
 
-    public User(ObjectId _id,String login, String password) throws Exception {
+    public User(String _id, String login, String password) throws Exception {
         super(_id);
         this.login = login;
         this.password = encryptMdp(password);
@@ -65,7 +64,7 @@ public class User extends Model {
     }
 
     @Override
-    public ObjectId find() {
+    public User find() {
         return null;
     }
 }

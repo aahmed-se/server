@@ -36,12 +36,12 @@ public class Harvester implements Runnable {
         return queue.poll();
     }
 
-    public void run(){
+    public synchronized void run(){
         while(true){
             try {
                 Model model = getNextModel();
                 if(model != null){
-                    ObjectId id = model.save();
+                    String id = model.save();
                     log.debug("Model {} save into id {}", model,id);
                 }else{
                     wait();

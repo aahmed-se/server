@@ -16,10 +16,10 @@ public class Database {
     private static final Logger log = LoggerFactory.getLogger(Database.class);
     private static Database ourInstance = new Database();
 
-    public final Morphia morphia;
-    public MongoClient mongoClient;
-    public MongoDatabase database;
-    public Datastore datastore;
+    private final Morphia morphia;
+    private MongoClient mongoClient;
+    private MongoDatabase database;
+    private Datastore datastore;
 
     public static Database get() {
         return ourInstance;
@@ -35,5 +35,19 @@ public class Database {
         datastore = morphia.createDatastore(mongoClient, "dfp");
     }
 
+    public Morphia getMorphia() {
+        return morphia;
+    }
 
+    public MongoClient getMongoClient() {
+        return mongoClient;
+    }
+
+    public MongoDatabase getDatabase() {
+        return database;
+    }
+
+    public Datastore getDatastore() {
+        return datastore;
+    }
 }

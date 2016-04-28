@@ -1,7 +1,6 @@
 package mongo;
 
-import org.bson.Document;
-import org.bson.types.ObjectId;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.slf4j.Logger;
@@ -9,40 +8,38 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created by thomas on 09/04/16.
- * TODO should be implemented by all model
  */
 @Entity(noClassnameStored = true)
-public abstract class Model extends Document{
+public abstract class Model{
 
     private static final Logger log = LoggerFactory.getLogger(Model.class);
 
     @Id
-    protected ObjectId _id;
+    protected String _id;
 
-    public Model(){
-
-    };
-    public Model(ObjectId _id) {
+    public Model(){}
+    public Model(String _id) {
         this._id = _id;
     }
 
-    public synchronized <T extends Model> ObjectId save(){
+    public synchronized <T extends Model> String save(){
         String collection = this.getClass().getAnnotation(Entity.class).value();
         if(collection != null){
-            _id = this.find();
             if(_id == null){
-                _id = new ObjectId();
+                _id = this.find().get_id();
             }
-            Database.get().datastore.save(this);
+
+            Key<T> key =(Key<T>) Database.get().getDatastore().save(this);
+            if(_id == null && key != null) _id =(String) key.getId();
 
             return _id;
         }
         return null;
     }
 
-    public abstract ObjectId find();
+    public abstract <T extends Model> T find();
 
-    public ObjectId get_id() {
+    public String get_id() {
         return _id;
     }
 }

@@ -2,7 +2,6 @@ package models;
 
 import mongo.Database;
 import mongo.Model;
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import responses.SummonerResponse;
@@ -24,7 +23,7 @@ public class Summoner extends Model {
     public Summoner() {
     }
 
-    public Summoner(ObjectId _id, double id, String name, double profileIconId, double summonerLevel, long revisionDate, Region region) {
+    public Summoner(String _id, double id, String name, double profileIconId, double summonerLevel, long revisionDate, Region region) {
         super(_id);
         this.id = id;
         this.name = name;
@@ -35,7 +34,7 @@ public class Summoner extends Model {
     }
 
     public Summoner(double id, String name, double profileIconId, double summonerLevel, long revisionDate,Region region) {
-        super(new ObjectId());
+        super();
         this.id = id;
         this.name = name;
         this.profileIconId = profileIconId;
@@ -100,12 +99,10 @@ public class Summoner extends Model {
     }
 
     @Override
-    public ObjectId find() {
-        Summoner summoner = Database.get().datastore
+    public Summoner find() {
+        return Database.get().getDatastore()
                 .find(Summoner.class)
                 .filter("id =",this.id)
                 .filter("region =",this.region).get();
-        if(summoner != null) return summoner.get_id();
-        return null;
     }
 }
