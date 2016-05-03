@@ -29,8 +29,8 @@ public abstract class Model{
                 _id = this.find().get_id();
             }
 
-            Key<T> key =(Key<T>) Database.get().getDatastore().save(this);
-            if(_id == null && key != null) _id =(String) key.getId();
+            Key<T> key = (Key<T>) Database.get().getDatastore().save(this);
+            if(_id == null && key != null) _id = (String) key.getId();
 
             return _id;
         }

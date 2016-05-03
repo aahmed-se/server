@@ -40,7 +40,6 @@
         <module>inputs</module>
         <module>server</module>
         <module>models</module>
-        <module>database</module>
         <module>api</module>
     </modules>
 

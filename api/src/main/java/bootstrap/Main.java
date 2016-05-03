@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URI;
-
 /**
  * Created by thomas on 27/04/16.
  */

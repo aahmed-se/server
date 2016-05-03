@@ -2,28 +2,30 @@ package models;
 
 import mongo.Database;
 import mongo.Model;
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import responses.SummonerResponse;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-@Entity(value = "summoner", noClassnameStored=true)
+@Entity(value = "summoner", noClassnameStored = true)
 public class Summoner extends Model {
 
-    private double id;
+    private static final Logger log = LoggerFactory.getLogger(Summoner.class);
+
+    private long id;
     private String name;
-    private double profileIconId;
-    private double summonerLevel;
+    private long profileIconId;
+    private int summonerLevel;
     private long revisionDate;
-    @Embedded
     private Region region;
 
     public Summoner() {
     }
 
-    public Summoner(String _id, double id, String name, double profileIconId, double summonerLevel, long revisionDate, Region region) {
+    public Summoner(String _id, long id, String name, long profileIconId, int summonerLevel, long revisionDate, Region region) {
         super(_id);
         this.id = id;
         this.name = name;
@@ -33,7 +35,7 @@ public class Summoner extends Model {
         this.region = region;
     }
 
-    public Summoner(double id, String name, double profileIconId, double summonerLevel, long revisionDate,Region region) {
+    public Summoner(long id, String name, long profileIconId, int summonerLevel, long revisionDate, Region region) {
         super();
         this.id = id;
         this.name = name;
@@ -51,7 +53,7 @@ public class Summoner extends Model {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -67,7 +69,7 @@ public class Summoner extends Model {
         return profileIconId;
     }
 
-    public void setProfileIconId(double profileIconId) {
+    public void setProfileIconId(long profileIconId) {
         this.profileIconId = profileIconId;
     }
 
@@ -75,7 +77,7 @@ public class Summoner extends Model {
         return summonerLevel;
     }
 
-    public void setSummonerLevel(double summonerLevel) {
+    public void setSummonerLevel(int summonerLevel) {
         this.summonerLevel = summonerLevel;
     }
 
@@ -92,9 +94,10 @@ public class Summoner extends Model {
         return "Summoner{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", profileIconId='" + profileIconId + '\'' +
-                ", revisionDate=" + revisionDate +
+                ", profileIconId=" + profileIconId +
                 ", summonerLevel=" + summonerLevel +
+                ", revisionDate=" + revisionDate +
+                ", region=" + region +
                 '}';
     }
 

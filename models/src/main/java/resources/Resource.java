@@ -1,7 +1,6 @@
 package resources;
 
 
-import models.Priority;
 import models.Region;
 
 /**
@@ -16,23 +15,21 @@ public abstract class Resource {
     protected Class[] parametersTypes;
     protected Object[] parameters;
     protected Region region;
-    protected Priority priority;
 
-    protected Resource(Class aClass, String method, Class[] parametersTypes, Object[] parameters, Region region, Priority priority) {
+    public Resource(Class aClass, String method, Class[] parametersTypes, Object[] parameters, Region region) {
         this.aClass = aClass;
         this.method = method;
         this.parametersTypes = parametersTypes;
         this.parameters = parameters;
         this.region = region;
-        this.priority = priority;
     }
 
-    protected Resource(Class aClass, String method, Region region, Priority priority){
-        this(aClass,method,null,null, region, priority);
+    protected Resource(Class aClass, String method, Region region){
+        this(aClass,method,null,null, region);
     }
 
     protected Resource(Class aClass, String method, Class[] parametersTypes, Object[] parameters){
-        this(aClass,method, parametersTypes,parameters,null,null);
+        this(aClass,method, parametersTypes,parameters,null);
     }
 
     public Class getaClass() {
@@ -53,9 +50,5 @@ public abstract class Resource {
 
     public Region getRegion() {
         return region;
-    }
-
-    public Priority getPriority() {
-        return priority;
     }
 }

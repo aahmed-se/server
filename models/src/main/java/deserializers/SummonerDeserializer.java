@@ -16,9 +16,9 @@ import java.util.List;
 /**
  * Created by thomas on 01/04/16.
  */
-public class SummonersDeserializer extends JsonDeserializer<SummonerResponse[]>{
+public class SummonerDeserializer extends JsonDeserializer<SummonerResponse[]>{
 
-    private static Logger log = LoggerFactory.getLogger(SummonersDeserializer.class);
+    private static Logger log = LoggerFactory.getLogger(SummonerDeserializer.class);
 
     @Override
     public SummonerResponse[] deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
