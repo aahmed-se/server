@@ -1,28 +1,24 @@
 package models;
 
-import java.lang.reflect.Field;
+import org.mongodb.morphia.annotations.Entity;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class ProfileIcon {
+@Entity("profileIcon")
+public class ProfileIcon extends Model{
 
-    private int _id;
     private int id;
     private String blob;
 
-    public ProfileIcon(int _id, int id, String blob) {
-        this._id = _id;
+    public ProfileIcon(int id, String blob) {
         this.id = id;
         this.blob = blob;
     }
 
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
+    @Override
+    public ProfileIcon find() {
+        return null;
     }
 
     public int getId() {

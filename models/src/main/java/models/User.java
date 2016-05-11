@@ -1,6 +1,6 @@
 package models;
 
-import mongo.Model;
+import org.mongodb.morphia.annotations.Entity;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -8,6 +8,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by CLOE on 27/01/2016.
  */
+@Entity("user")
 public class User extends Model {
 
     private String login;

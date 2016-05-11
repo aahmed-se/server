@@ -1,6 +1,6 @@
 package utils;
 
-import mongo.Model;
+import models.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

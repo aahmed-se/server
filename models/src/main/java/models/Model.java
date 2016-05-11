@@ -1,5 +1,6 @@
-package mongo;
+package models;
 
+import mongo.Database;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;

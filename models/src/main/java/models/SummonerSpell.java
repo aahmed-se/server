@@ -1,21 +1,20 @@
 package models;
 
-import java.lang.reflect.Field;
+import org.mongodb.morphia.annotations.Entity;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class SummonerSpell {
+@Entity("summonerSpell")
+public class SummonerSpell extends Model {
 
-    private int _id;
     private String name;
     private String description;
     private int summonerLevel;
     private int id;
     private String key;
 
-    public SummonerSpell(int _id, String name, String description, int summonerLevel, int id, String key) {
-        this._id = _id;
+    public SummonerSpell(String name, String description, int summonerLevel, int id, String key) {
         this.name = name;
         this.description = description;
         this.summonerLevel = summonerLevel;
@@ -23,12 +22,9 @@ public class SummonerSpell {
         this.key = key;
     }
 
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
+    @Override
+    public SummonerSpell find() {
+        return null;
     }
 
     public String getName() {

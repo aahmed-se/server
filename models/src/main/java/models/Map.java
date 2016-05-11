@@ -1,30 +1,18 @@
 package models;
 
-import java.lang.reflect.Field;
-
 /**
  * Created by CLOE on 13/01/2016.
  */
 public class Map {
 
-    private int _id;
     private String mapId;
     private String name;
     private String notes;
 
-    public Map(int _id, String mapId, String name, String notes) {
-        this._id = _id;
+    public Map(String mapId, String name, String notes) {
         this.mapId = mapId;
         this.name = name;
         this.notes = notes;
-    }
-
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
     }
 
     public String getMapId() {

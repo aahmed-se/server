@@ -48,16 +48,16 @@ public class ChampionResource {
             ){
         boolean addSkin = !skins.equals("");
         try {
-            Query<Champion> champion = Database.get().getDatastore().find(Champion.class).filter("id = ",id);
-            Champion result;
+            Query<Champion> queryChampion = Database.get().getDatastore().find(Champion.class).filter("id = ",id);
+            Champion champion;
 
-            if(!addSkin) champion = champion.retrievedFields(false,"skins");
-            result = champion.get();
+            if(!addSkin) queryChampion = queryChampion.retrievedFields(false,"skins");
+            champion = queryChampion.get();
 
             if(champion == null){
                 return Response.ok(new HttpError(404,"Champion not found !")).status(404).build();
             }
-            return Response.ok(mapper.writeValueAsString(result)).status(Response.Status.OK).build();
+            return Response.ok(mapper.writeValueAsString(champion)).status(Response.Status.OK).build();
         } catch (Exception e) {
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());

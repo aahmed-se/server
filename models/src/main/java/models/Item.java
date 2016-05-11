@@ -1,13 +1,13 @@
 package models;
 
-import java.lang.reflect.Field;
+import org.mongodb.morphia.annotations.Entity;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Item {
+@Entity("item")
+public class Item extends Model{
 
-    private int _id;
     private double id;
     private String name;
     private String group;
@@ -15,21 +15,12 @@ public class Item {
     private String plainText;
 
 
-    public Item(int _id, double id, String name, String group, String description, String plainText) {
-        this._id = _id;
+    public Item(double id, String name, String group, String description, String plainText) {
         this.id = id;
         this.name = name;
         this.group = group;
         this.description = description;
         this.plainText = plainText;
-    }
-
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
     }
 
     public double getId() {
@@ -72,4 +63,8 @@ public class Item {
         this.plainText = plainText;
     }
 
+    @Override
+    public Item find() {
+        return null;
+    }
 }

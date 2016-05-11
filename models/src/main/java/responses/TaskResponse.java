@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import deserializers.TaskDeserializer;
 import models.Priority;
 import models.Region;
-import mongo.Model;
+import models.Model;
 
 
 /**

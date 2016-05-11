@@ -1,148 +1,121 @@
 package models;
 
-import java.util.ArrayList;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+
+import java.util.List;
+import java.util.Map;
 
 /**
- * Created by Clo� on 18/11/2015.
+ * Created by Thomas.B on 18/11/2015.
  */
-public class Game {
+@Entity("game")
+public class Game extends Model{
 
-    private int id;
-    private double gameLength;
-    private String gameMode;
-    private double mapId;
-    private ArrayList<BannedChampion> bannedChampions;
+    private long id;
+    private int championId;
+    private long endGame;
+    private List<Player> fellowPlayers;
+    private GameMode gameMode;
     private String gameType;
+    private GameSubType gameSubType;
+    private boolean invalid;
+    private int ipEarned;
+    private int level;
     private double gameId;
-    private ArrayList<Summoner> observers;
-    private double gameQueueConfigId;
-    private double gameStartTime;
-    private ArrayList<Summoner> participants;
-    private String platformId;
+    private SummonerSpell spell1;
+    private SummonerSpell spell2;
+    private Map<String, Integer> stats;
+    private Team teamId;
 
-    public Game(int id, double gameLength, String gameMode, double mapId, ArrayList<BannedChampion> bannedChampions, String gameType, double gameId, ArrayList<Summoner> observers, double gameQueueConfigId, double gameStartTime, ArrayList<Summoner> participants, String platformId) {
-        this.id = id;
-        this.gameLength = gameLength;
-        this.gameMode = gameMode;
-        this.mapId = mapId;
-        this.bannedChampions = bannedChampions;
-        this.gameType = gameType;
-        this.gameId = gameId;
-        this.observers = observers;
-        this.gameQueueConfigId = gameQueueConfigId;
-        this.gameStartTime = gameStartTime;
-        this.participants = participants;
-        this.platformId = platformId;
+    @Override
+    public Game find() {
+        return null;
     }
 
-    public Game(int id, double gameLength, String gameMode, double mapId, String gameType, double gameId, double gameQueueConfigId, double gameStartTime, String platformId) {
-        this.id = id;
-        this.gameLength = gameLength;
-        this.gameMode = gameMode;
-        this.mapId = mapId;
-        this.bannedChampions = new ArrayList<BannedChampion>();
-        this.gameType = gameType;
-        this.gameId = gameId;
-        this.observers = new ArrayList<Summoner>();
-        this.gameQueueConfigId = gameQueueConfigId;
-        this.gameStartTime = gameStartTime;
-        this.participants = new ArrayList<Summoner>();
-        this.platformId = platformId;
+    @Embedded
+    private class Player{
+        public int championId;
+        public long summonerId;
+        public int teamId;
     }
 
-    public int getId() {
+    public Game(String _id, long id, int championId, long endGame, List<Player> fellowPlayers, GameMode gameMode, String gameType, GameSubType gameSubType, boolean invalid, int ipEarned, int level, double gameId, SummonerSpell spell1, SummonerSpell spell2, Map<String, Integer> stats, Team teamId) {
+        super(_id);
+        this.id = id;
+        this.championId = championId;
+        this.endGame = endGame;
+        this.fellowPlayers = fellowPlayers;
+        this.gameMode = gameMode;
+        this.gameType = gameType;
+        this.gameSubType = gameSubType;
+        this.invalid = invalid;
+        this.ipEarned = ipEarned;
+        this.level = level;
+        this.gameId = gameId;
+        this.spell1 = spell1;
+        this.spell2 = spell2;
+        this.stats = stats;
+        this.teamId = teamId;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getChampionId() {
+        return championId;
     }
 
-    public double getGameLength() {
-        return gameLength;
+    public long getEndGame() {
+        return endGame;
     }
 
-    public void setGameLength(double gameLength) {
-        this.gameLength = gameLength;
+    public List<Player> getFellowPlayers() {
+        return fellowPlayers;
     }
 
-    public String getGameMode() {
+    public GameMode getGameMode() {
         return gameMode;
-    }
-
-    public void setGameMode(String gameMode) {
-        this.gameMode = gameMode;
-    }
-
-    public double getMapId() {
-        return mapId;
-    }
-
-    public void setMapId(double mapId) {
-        this.mapId = mapId;
-    }
-
-    public ArrayList<BannedChampion> getBannedChampions() {
-        return bannedChampions;
-    }
-
-    public void setBannedChampions(ArrayList<BannedChampion> bannedChampions) {
-        this.bannedChampions = bannedChampions;
     }
 
     public String getGameType() {
         return gameType;
     }
 
-    public void setGameType(String gameType) {
-        this.gameType = gameType;
+    public GameSubType getGameSubType() {
+        return gameSubType;
+    }
+
+    public boolean isInvalid() {
+        return invalid;
+    }
+
+    public int getIpEarned() {
+        return ipEarned;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public double getGameId() {
         return gameId;
     }
 
-    public void setGameId(double gameId) {
-        this.gameId = gameId;
+    public SummonerSpell getSpell1() {
+        return spell1;
     }
 
-    public ArrayList<Summoner> getObservers() {
-        return observers;
+    public SummonerSpell getSpell2() {
+        return spell2;
     }
 
-    public void setObservers(ArrayList<Summoner> observers) {
-        this.observers = observers;
+    public Map<String, Integer> getStats() {
+        return stats;
     }
 
-    public double getGameQueueConfigId() {
-        return gameQueueConfigId;
-    }
-
-    public void setGameQueueConfigId(double gameQueueConfigId) {
-        this.gameQueueConfigId = gameQueueConfigId;
-    }
-
-    public double getGameStartTime() {
-        return gameStartTime;
-    }
-
-    public void setGameStartTime(double gameStartTime) {
-        this.gameStartTime = gameStartTime;
-    }
-
-    public ArrayList<Summoner> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(ArrayList<Summoner> participants) {
-        this.participants = participants;
-    }
-
-    public String getPlatformId() {
-        return platformId;
-    }
-
-    public void setPlatformId(String platformId) {
-        this.platformId = platformId;
+    public Team getTeamId() {
+        return teamId;
     }
 }

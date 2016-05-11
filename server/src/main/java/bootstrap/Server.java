@@ -1,4 +1,5 @@
-import bootstrap.Main;
+package bootstrap;
+
 import consumers.ModelConsumer;
 import mongo.Database;
 import org.glassfish.grizzly.http.server.HttpServer;

@@ -1,7 +1,6 @@
 package models;
 
 import mongo.Database;
-import mongo.Model;
 import org.mongodb.morphia.annotations.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

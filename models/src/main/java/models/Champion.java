@@ -1,6 +1,5 @@
 package models;
 
-import mongo.Model;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 

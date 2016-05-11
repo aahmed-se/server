@@ -1,38 +1,29 @@
 package models;
 
-import java.lang.reflect.Field;
+import org.mongodb.morphia.annotations.Entity;
+
 import java.util.ArrayList;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Masteries{
+@Entity("masterie")
+public class Masterie extends Model{
 
-    private int _id;
     private double id;
     private String name;
     private ArrayList<String> description;
 
-    public Masteries(int _id, double id, String name, ArrayList<String> description) {
-        this._id = _id;
+    public Masterie(double id, String name, ArrayList<String> description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public Masteries(int _id, double id, String name) {
-        this._id = _id;
+    public Masterie(double id, String name) {
         this.id = id;
         this.name = name;
         this.description = new ArrayList<String>();
-    }
-
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
     }
 
     public double getId() {
@@ -59,4 +50,8 @@ public class Masteries{
         this.description = description;
     }
 
+    @Override
+    public Masterie find() {
+        return null;
+    }
 }
