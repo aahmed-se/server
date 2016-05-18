@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import static main.Bootstrap.CONFIG;
 /**
  * Created by Thomas on 19/11/2015.
  */
@@ -32,9 +32,9 @@ public class Amqp {
     private ConnectionFactory factory;
 
     private Amqp() throws Exception {
-        uri = "amqp://127.0.0.1/collectorQueue";
-        username = "collectorUser";
-        password = "BigDataAmqp";
+        uri = "amqp://" + CONFIG.getString("amqp.address") + ":" + CONFIG.getString("amqp.port") + "/" + CONFIG.getString("amqp.vhost");
+        username = CONFIG.getString("amqp.user.login");
+        password = CONFIG.getString("amqp.user.password");
 
         //initialize channel
         factory = new ConnectionFactory();

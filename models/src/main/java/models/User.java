@@ -4,7 +4,7 @@ import org.mongodb.morphia.annotations.Entity;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+import static main.Bootstrap.CONFIG;
 /**
  * Created by CLOE on 27/01/2016.
  */
@@ -13,38 +13,42 @@ public class User extends Model {
 
     private String login;
     private String password;
-    private String key = Long.toHexString(Double.doubleToLongBits(Math.random()));
+    private final String BEFORE = CONFIG.getString("user.salting.before");
+    private final String AFTER = CONFIG.getString("user.salting.after");
 
-    public User(String login, String password) throws Exception {
+    public User(String login, String password) {
         super();
         this.login = login;
-        this.password = encryptMdp(password);
+        setPassword(password);
     }
 
-    public User(String _id, String login, String password) throws Exception {
+    public User(String _id, String login, String password) {
         super(_id);
         this.login = login;
-        this.password = encryptMdp(password);
+        this.password = encrypt(password);
     }
 
-    public String encryptMdp(String password) throws Exception {
-        String generatedPassword = null;
-        System.out.println("AVANT : " + password);
+    /**
+     *
+     * @param string
+     * @return encrypted string with before and after
+     */
+    private String encrypt(String string){
+        String generatedPassword = "";
         try {
-            password = key + password + key;
-            System.out.println("APRES 'SALAGE' : " + password);
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(password.getBytes());
-            byte[] bytes = md.digest();
-            StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            generatedPassword = sb.toString();
+            string = BEFORE + string + AFTER;
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(string.getBytes());
+            byte byteData[] = md5.digest();
+
+            StringBuffer stringBuffer = new StringBuffer();
+            for (int i = 0; i < byteData.length; i++)
+                stringBuffer.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+
+            generatedPassword = stringBuffer.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        System.out.println("APRES HASH : " + generatedPassword);
         return generatedPassword;
     }
 
@@ -56,12 +60,12 @@ public class User extends Model {
         this.login = login;
     }
 
-    public String getMdp() {
+    public String getPassword() {
         return password;
     }
 
-    public void setMdp(String password) {
-        this.password = password;
+    public void setPassword(String password) {
+        this.password = encrypt(password);
     }
 
     @Override

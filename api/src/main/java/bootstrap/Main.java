@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URI;
+import static main.Bootstrap.CONFIG;
 /**
  * Created by thomas on 27/04/16.
  */
@@ -16,7 +17,7 @@ public class Main {
     final static Logger log = LoggerFactory.getLogger(Main.class);
 
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://0.0.0.0:8080/api/";
+    public static final String BASE_URI = CONFIG.getString("api.uri");
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.

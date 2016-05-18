@@ -1,5 +1,7 @@
 package bootstrap;
 
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 import consumers.ModelConsumer;
 import mongo.Database;
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -12,6 +14,9 @@ import utils.Harvester;
  * Created by Thomas on 06/04/2016.
  */
 public class Server {
+
+    public static final Config CONFIG = ConfigFactory.load("server");
+
     final static Logger log = LoggerFactory.getLogger(Server.class);
 
     public static void main(String[] args) {
