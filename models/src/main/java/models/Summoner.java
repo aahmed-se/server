@@ -20,6 +20,8 @@ public class Summoner extends Model {
     private int summonerLevel;
     private long revisionDate;
     private Region region;
+    private long created;
+    private long updated;
 
     public Summoner() {
     }
