@@ -41,6 +41,7 @@
         <module>server</module>
         <module>models</module>
         <module>api</module>
+        <module>config</module>
     </modules>
 
     <dependencyManagement>

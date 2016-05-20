@@ -2,6 +2,8 @@ package models;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Index;
+import org.mongodb.morphia.annotations.Indexes;
 
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
  * Created by CLOE on 13/01/2016.
  */
 @Entity(value = "champion", noClassnameStored = true)
+@Indexes(@Index("key"))
 public class Champion extends Model {
 
     private int id;

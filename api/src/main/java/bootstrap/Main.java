@@ -8,7 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URI;
-import static main.Bootstrap.CONFIG;
+
+import static conf.Configuration.CONFIG;
 /**
  * Created by thomas on 27/04/16.
  */

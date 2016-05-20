@@ -1,6 +1,7 @@
 package models;
 
 import mongo.Database;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -31,14 +32,18 @@ public abstract class Model{
             }
 
             Key<T> key = (Key<T>) Database.get().getDatastore().save(this);
-            if(_id == null && key != null) _id = (String) key.getId();
+            if(_id == null && key != null) _id =(String) key.getId();
 
             return _id;
         }
         return null;
     }
 
-    public abstract <T extends Model> T find();
+    public <T extends Model> T find(){
+        if(this.get_id() == null) return (T)this;
+        return Database.get().getDatastore()
+                .get((T) this);
+    }
 
     public String get_id() {
         return _id;

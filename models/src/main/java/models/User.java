@@ -1,10 +1,11 @@
 package models;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import static main.Bootstrap.CONFIG;
+import static conf.Configuration.CONFIG;
 /**
  * Created by CLOE on 27/01/2016.
  */
@@ -13,13 +14,15 @@ public class User extends Model {
 
     private String login;
     private String password;
-    private final String BEFORE = CONFIG.getString("user.salting.before");
-    private final String AFTER = CONFIG.getString("user.salting.after");
+    private static final String BEFORE = CONFIG.getString("user.salting.before");
+    private static final String AFTER = CONFIG.getString("user.salting.after");
+
+    public User(){}
 
     public User(String login, String password) {
         super();
         this.login = login;
-        setPassword(password);
+        this.password = encrypt(password);
     }
 
     public User(String _id, String login, String password) {
@@ -28,12 +31,16 @@ public class User extends Model {
         this.password = encrypt(password);
     }
 
+    public User(String _id){
+        super(_id);
+    }
+
     /**
      *
      * @param string
      * @return encrypted string with before and after
      */
-    private String encrypt(String string){
+    public static String encrypt(String string){
         String generatedPassword = "";
         try {
             string = BEFORE + string + AFTER;
@@ -68,8 +75,4 @@ public class User extends Model {
         this.password = encrypt(password);
     }
 
-    @Override
-    public User find() {
-        return null;
-    }
 }

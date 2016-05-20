@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-import static main.Bootstrap.CONFIG;
+import static conf.Configuration.CONFIG;
 /**
  * Created by Thomas on 19/11/2015.
  */

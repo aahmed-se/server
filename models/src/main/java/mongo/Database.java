@@ -2,21 +2,18 @@ package mongo;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import static conf.Configuration.CONFIG;
 /**
- * Created by Clo� on 29/10/2015.
+ * Created by Thomas 29/10/2015.
  */
 
 public class Database {
 
     private static final Logger log = LoggerFactory.getLogger(Database.class);
-    public static final Config CONFIG = ConfigFactory.load("model");
     private static Database ourInstance = new Database();
 
     private final Morphia morphia;

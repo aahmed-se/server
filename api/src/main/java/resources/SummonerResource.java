@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.HttpError;
 
-import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,7 +17,6 @@ import javax.ws.rs.core.Response;
 /**
  * Created by thomas on 29/04/16.
  */
-@Singleton
 @Path("/summoner")
 @Produces("application/json")
 public class SummonerResource {

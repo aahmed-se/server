@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.HttpError;
 
-import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -19,7 +18,6 @@ import java.util.List;
 /**
  * Created by thomas on 28/04/16.
  */
-@Singleton
 @Path("/champion")
 @Produces("application/json")
 public class ChampionResource {
@@ -31,8 +29,8 @@ public class ChampionResource {
     public Response getChampions() {
         log.debug("Get champions called");
         try {
-            List<Champion> champions =  Database.get().getDatastore().find(Champion.class).retrievedFields(false,"skins").asList();
-            return Response.ok(mapper.writeValueAsString(champions)).status(Response.Status.OK).build();
+            List<Champion> champions =  Database.get().getDatastore().find(Champion.class).order("key").retrievedFields(false,"skins").asList();
+            return Response.ok(mapper.writeValueAsString(champions)).status(Response.Status.OK).header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Headers","Content-Type").build();
         } catch (Exception e) {
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
@@ -57,7 +55,7 @@ public class ChampionResource {
             if(champion == null){
                 return Response.ok(new HttpError(404,"Champion not found !")).status(404).build();
             }
-            return Response.ok(mapper.writeValueAsString(champion)).status(Response.Status.OK).build();
+            return Response.ok(mapper.writeValueAsString(champion)).status(Response.Status.OK).header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Headers","Content-Type").build();
         } catch (Exception e) {
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
