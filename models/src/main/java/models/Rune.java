@@ -1,34 +1,46 @@
 package models;
 
-import java.lang.reflect.Field;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-public class Rune {
+@Entity("rune")
+public class Rune extends Model{
 
-    private String tier;
-    private String type;
+    private long id;
+    private String name;
+    private String description;
+    @Embedded
+    private SubRune rune;
 
-    public Rune(String tier, String type) {
-        this.tier = tier;
-        this.type = type;
+    public Rune() {
     }
 
-    public String getTier() {
-        return tier;
+    public Rune(long id, String name, String description, SubRune rune) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.rune = rune;
     }
 
-    public void setTier(String tier) {
-        this.tier = tier;
+    public Rune(String _id, long id, String name, String description, SubRune rune) {
+        super(_id);
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.rune = rune;
     }
 
-    public String getType() {
-        return type;
-    }
+    @Embedded
+    public class SubRune {
 
-    public void setType(String type) {
-        this.type = type;
-    }
+        public SubRune() {
+        }
 
+        public boolean isRune;
+        public String tier;
+        public String type;
+    }
 }

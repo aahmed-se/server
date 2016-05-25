@@ -10,7 +10,7 @@ import mongo.Database;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import request.UserLoginRequest;
+import requests.UserLoginRequest;
 import utils.HttpError;
 
 import javax.ws.rs.*;
@@ -28,7 +28,7 @@ import static conf.Configuration.CONFIG;
 public class UserResource {
     private static final Logger log = LoggerFactory.getLogger(UserResource.class);
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @GET
     @Path("{id}")
@@ -36,7 +36,7 @@ public class UserResource {
         try {
             User user = Database.get().getDatastore().get(User.class,new ObjectId(_id));
             if(user== null) return Response.ok(new HttpError(404,"User not found !")).status(404).build();
-            return Response.ok(mapper.writeValueAsString(user)).status(200).build();
+            return Response.ok(MAPPER.writeValueAsString(user)).status(200).build();
         }catch (Exception e){
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
@@ -56,11 +56,11 @@ public class UserResource {
             if(user== null) return Response.ok(new HttpError(404,"User not found !")).status(404).build();
 
             String token = Jwts.builder()
-                    .setSubject(mapper.writeValueAsString(user))
+                    .setSubject(MAPPER.writeValueAsString(user))
                     .setExpiration(new Date(new Date().getTime() + CONFIG.getLong("token.timeout")))
                     .signWith(SignatureAlgorithm.forName(CONFIG.getString("token.algorithm")), CONFIG.getString("token.secret"))
                     .compact();
-            return Response.ok(mapper.writeValueAsString(new Token(token))).status(200).build();
+            return Response.ok(MAPPER.writeValueAsString(new Token(token))).status(200).build();
         }catch (Exception e){
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
@@ -75,7 +75,7 @@ public class UserResource {
         try {
 
             Claims body = Jwts.parser().setSigningKey(CONFIG.getString("token.secret")).parseClaimsJws(token).getBody();
-            return Response.ok(mapper.writeValueAsString(body)).status(200).build();
+            return Response.ok(MAPPER.writeValueAsString(body)).status(200).build();
         } catch (Exception e) {
 
         }

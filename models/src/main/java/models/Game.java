@@ -1,8 +1,8 @@
 package models;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import responses.GameResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -35,10 +35,31 @@ public class Game extends Model{
     }
 
     @Embedded
-    private class Player{
+    public class Player{
+        public Player(){}
         public int championId;
         public long summonerId;
         public int teamId;
+    }
+    public Game(){
+    }
+
+    public Game(long id, int championId, long endGame, List<Player> fellowPlayers, GameMode gameMode, String gameType, GameSubType gameSubType, boolean invalid, int ipEarned, int level, double gameId, SummonerSpell spell1, SummonerSpell spell2, Map<String, Integer> stats, Team teamId) {
+        this.id = id;
+        this.championId = championId;
+        this.endGame = endGame;
+        this.fellowPlayers = fellowPlayers;
+        this.gameMode = gameMode;
+        this.gameType = gameType;
+        this.gameSubType = gameSubType;
+        this.invalid = invalid;
+        this.ipEarned = ipEarned;
+        this.level = level;
+        this.gameId = gameId;
+        this.spell1 = spell1;
+        this.spell2 = spell2;
+        this.stats = stats;
+        this.teamId = teamId;
     }
 
     public Game(String _id, long id, int championId, long endGame, List<Player> fellowPlayers, GameMode gameMode, String gameType, GameSubType gameSubType, boolean invalid, int ipEarned, int level, double gameId, SummonerSpell spell1, SummonerSpell spell2, Map<String, Integer> stats, Team teamId) {
@@ -58,6 +79,24 @@ public class Game extends Model{
         this.spell2 = spell2;
         this.stats = stats;
         this.teamId = teamId;
+    }
+
+    public Game(GameResponse response) {
+        this(response.id,
+                response.championId,
+                response.endGame,
+                response.fellowPlayers,
+                response.gameMode,
+                response.gameType,
+                response.gameSubType,
+                response.invalid,
+                response.ipEarned,
+                response.level,
+                response.gameId,
+                response.spell1,
+                response.spell2,
+                response.stats,
+                response.teamId);
     }
 
     public long getId() {

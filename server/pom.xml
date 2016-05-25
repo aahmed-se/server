@@ -12,6 +12,7 @@
             <groupId>com.ynov.laboDev</groupId>
             <artifactId>inputs</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>

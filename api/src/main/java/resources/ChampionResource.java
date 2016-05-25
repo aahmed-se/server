@@ -23,14 +23,14 @@ import java.util.List;
 public class ChampionResource {
     private static final Logger log = LoggerFactory.getLogger(ChampionResource.class);
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @GET
     public Response getChampions() {
         log.debug("Get champions called");
         try {
             List<Champion> champions =  Database.get().getDatastore().find(Champion.class).order("key").retrievedFields(false,"skins").asList();
-            return Response.ok(mapper.writeValueAsString(champions)).status(Response.Status.OK).header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Headers","Content-Type").build();
+            return Response.ok(MAPPER.writeValueAsString(champions)).status(Response.Status.OK).header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Headers","Content-Type").build();
         } catch (Exception e) {
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
@@ -55,7 +55,7 @@ public class ChampionResource {
             if(champion == null){
                 return Response.ok(new HttpError(404,"Champion not found !")).status(404).build();
             }
-            return Response.ok(mapper.writeValueAsString(champion)).status(Response.Status.OK).header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Headers","Content-Type").build();
+            return Response.ok(MAPPER.writeValueAsString(champion)).status(Response.Status.OK).header("Access-Control-Allow-Origin","*").header("Access-Control-Allow-Headers","Content-Type").build();
         } catch (Exception e) {
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
