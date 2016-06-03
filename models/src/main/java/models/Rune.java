@@ -1,12 +1,13 @@
 package models;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
 /**
- * Created by CLOE on 13/01/2016.
+ * Created by Kaylleur on 13/01/2016.
  */
-@Entity("rune")
+@Entity(value = "rune",noClassnameStored = true)
 public class Rune extends Model{
 
     private long id;
@@ -25,7 +26,7 @@ public class Rune extends Model{
         this.rune = rune;
     }
 
-    public Rune(String _id, long id, String name, String description, SubRune rune) {
+    public Rune(ObjectId _id, long id, String name, String description, SubRune rune) {
         super(_id);
         this.id = id;
         this.name = name;

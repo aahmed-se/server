@@ -1,5 +1,6 @@
 package models;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Index;
@@ -8,7 +9,7 @@ import org.mongodb.morphia.annotations.Indexes;
 import java.util.List;
 
 /**
- * Created by CLOE on 13/01/2016.
+ * Created by Kaylleur on 13/01/2016.
  */
 @Entity(value = "champion", noClassnameStored = true)
 @Indexes(@Index("key"))
@@ -21,7 +22,7 @@ public class Champion extends Model {
     @Embedded
     private List<Skin> skins;
 
-    public Champion(String _id, int id, String key, String name, String title) {
+    public Champion(ObjectId _id, int id, String key, String name, String title) {
         super(_id);
         this.id = id;
         this.key = key;

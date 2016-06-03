@@ -2,36 +2,38 @@ package models;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import static conf.Configuration.CONFIG;
 /**
- * Created by CLOE on 27/01/2016.
+ * Created by Kaylleur on 27/01/2016.
  */
-@Entity("user")
+@Entity(value = "user",noClassnameStored = true)
 public class User extends Model {
 
     private String login;
     private String password;
+    private String email;
     private static final String BEFORE = CONFIG.getString("user.salting.before");
     private static final String AFTER = CONFIG.getString("user.salting.after");
 
     public User(){}
 
-    public User(String login, String password) {
+    public User(String login, String password, String email) {
         super();
         this.login = login;
         this.password = encrypt(password);
+        this.email = email;
     }
 
-    public User(String _id, String login, String password) {
+    public User(ObjectId _id, String login, String password, String email) {
         super(_id);
         this.login = login;
         this.password = encrypt(password);
+        this.email = email;
     }
 
-    public User(String _id){
+    public User(ObjectId _id){
         super(_id);
     }
 
@@ -63,16 +65,28 @@ public class User extends Model {
         return login;
     }
 
-    public void setLogin(String login) {
+    public User setLogin(String login) {
         this.login = login;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = encrypt(password);
+        return this;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public User setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
 
 }

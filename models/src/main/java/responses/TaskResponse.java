@@ -8,7 +8,7 @@ import models.Model;
 
 
 /**
- * Created by Maxime on 16/12/2015.
+ * Created by Kaylleur on 16/12/2015.
  */
 @JsonDeserialize(using = TaskDeserializer.class)
 public class TaskResponse extends Response {

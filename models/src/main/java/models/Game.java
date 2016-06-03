@@ -1,5 +1,6 @@
 package models;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import responses.GameResponse;
@@ -10,7 +11,7 @@ import java.util.Map;
 /**
  * Created by Thomas.B on 18/11/2015.
  */
-@Entity("game")
+@Entity(value = "game",noClassnameStored = true)
 public class Game extends Model{
 
     private long id;
@@ -62,7 +63,7 @@ public class Game extends Model{
         this.teamId = teamId;
     }
 
-    public Game(String _id, long id, int championId, long endGame, List<Player> fellowPlayers, GameMode gameMode, String gameType, GameSubType gameSubType, boolean invalid, int ipEarned, int level, double gameId, SummonerSpell spell1, SummonerSpell spell2, Map<String, Integer> stats, Team teamId) {
+    public Game(ObjectId _id, long id, int championId, long endGame, List<Player> fellowPlayers, GameMode gameMode, String gameType, GameSubType gameSubType, boolean invalid, int ipEarned, int level, double gameId, SummonerSpell spell1, SummonerSpell spell2, Map<String, Integer> stats, Team teamId) {
         super(_id);
         this.id = id;
         this.championId = championId;

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Maxime on 27/01/2016.
+ * Created by Kaylleur on 27/01/2016.
  */
 public class GameResponse extends Response{
 

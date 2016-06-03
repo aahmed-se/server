@@ -5,9 +5,9 @@ import org.mongodb.morphia.annotations.Entity;
 import java.util.ArrayList;
 
 /**
- * Created by CLOE on 13/01/2016.
+ * Created by Kaylleur on 13/01/2016.
  */
-@Entity("mastery")
+@Entity(value = "mastery",noClassnameStored = true)
 public class Mastery extends Model{
 
     private long id;
