@@ -1,15 +1,16 @@
 package models;
 
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
 import java.util.ArrayList;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-@Entity("mastery")
-public class Mastery extends Model{
-
+@Entity("masteries")
+public class Mastery{
+    @Id
     private long id;
     private String name;
     private ArrayList<String> description;
@@ -23,9 +24,7 @@ public class Mastery extends Model{
     }
 
     public Mastery(long id, String name) {
-        this.id = id;
-        this.name = name;
-        this.description = new ArrayList<String>();
+        this(id,name,new ArrayList<>());
     }
 
     public double getId() {
@@ -50,10 +49,5 @@ public class Mastery extends Model{
 
     public void setDescription(ArrayList<String> description) {
         this.description = description;
-    }
-
-    @Override
-    public Mastery find() {
-        return null;
     }
 }

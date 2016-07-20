@@ -1,15 +1,15 @@
 package models;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import static conf.Configuration.CONFIG;
 /**
- * Created by CLOE on 27/01/2016.
+ * Created by Kaylleur on 27/01/2016.
  */
-@Entity("user")
+@Entity(value = "user", noClassnameStored = true)
 public class User extends Model {
 
     private String login;

@@ -2,13 +2,14 @@ package models;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-@Entity("rune")
-public class Rune extends Model{
-
+@Entity("runes")
+public class Rune{
+    @Id
     private long id;
     private String name;
     private String description;
@@ -25,22 +26,30 @@ public class Rune extends Model{
         this.rune = rune;
     }
 
-    public Rune(String _id, long id, String name, String description, SubRune rune) {
-        super(_id);
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.rune = rune;
+    public long getId() {
+        return id;
     }
 
-    @Embedded
-    public class SubRune {
-
-        public SubRune() {
-        }
-
-        public boolean isRune;
-        public String tier;
-        public String type;
+    public String getName() {
+        return name;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public SubRune getRune() {
+        return rune;
+    }
+}
+
+@Embedded
+class SubRune {
+
+    public SubRune() {
+    }
+
+    public boolean isRune;
+    public String tier;
+    public String type;
 }

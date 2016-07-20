@@ -1,6 +1,7 @@
 package resources;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.*;
 import models.Champion;
 import mongo.Database;
 import org.mongodb.morphia.query.Query;
@@ -8,17 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.HttpError;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
  * Created by thomas on 28/04/16.
  */
-@Path("/champion")
+@Path("/champions")
+@Api(value = "Champion",description = "Champions information")
 @Produces("application/json")
 public class ChampionResource {
     private static final Logger log = LoggerFactory.getLogger(ChampionResource.class);
@@ -26,6 +25,10 @@ public class ChampionResource {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @GET
+    @ApiOperation(value = "Get all champions.",notes = "Don't return any skins", response = Champion[].class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 500, message = "Can't retrieve champions. Internal error server.")
+    })
     public Response getChampions() {
         log.debug("Get champions called");
         try {
@@ -39,17 +42,21 @@ public class ChampionResource {
     }
 
     @GET
-    @Path("{id}{skins:(/skins)?}")
+    @Path("/{id}")
+    @ApiOperation(value = "Get champion by id", notes = "Default don't return any skins", response = Champion.class)
+    @ApiResponses( value = {
+            @ApiResponse(code = 404, message = "Champion not found at this id."),
+            @ApiResponse(code = 500, message = "Can't retrieve the champion.")
+    })
     public Response getChampions(
             @PathParam("id") int id,
-            @PathParam("skins") String skins
+            @QueryParam("skins") boolean skins
             ){
-        boolean addSkin = !skins.equals("");
         try {
             Query<Champion> queryChampion = Database.get().getDatastore().find(Champion.class).filter("id = ",id);
             Champion champion;
 
-            if(!addSkin) queryChampion = queryChampion.retrievedFields(false,"skins");
+            if(!skins) queryChampion = queryChampion.retrievedFields(false,"skins");
             champion = queryChampion.get();
 
             if(champion == null){

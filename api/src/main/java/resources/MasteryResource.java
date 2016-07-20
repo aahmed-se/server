@@ -1,6 +1,10 @@
 package resources;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import models.Mastery;
 import mongo.Database;
 import org.slf4j.Logger;
@@ -16,7 +20,8 @@ import javax.ws.rs.core.Response;
 /**
  * Created by thomas on 21/05/16.
  */
-@Path("/mastery")
+@Path("/masteries")
+@Api(value = "Mastery",description = "Mastery information")
 @Produces("application/json")
 public class MasteryResource {
 
@@ -26,6 +31,10 @@ public class MasteryResource {
 
 
     @GET
+    @ApiOperation(value="Get all masteries", response = Mastery[].class)
+    @ApiResponses( value = {
+            @ApiResponse(code = 500, message = "Can't retrieve masteries.")
+            })
     public Response getMasteries(){
         Response.ResponseBuilder responseBuilder = Response.ok();
         try {
@@ -46,6 +55,11 @@ public class MasteryResource {
 
     @GET
     @Path("{id}")
+    @ApiOperation(value = "Get mastery by id", response = Mastery.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Not found !"),
+            @ApiResponse(code = 500, message = "Can't retrieve mastery.")
+    })
     public Response getMastery(@PathParam("id") Long id){
         Response.ResponseBuilder responseBuilder = Response.ok();
         try {
@@ -56,7 +70,7 @@ public class MasteryResource {
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
 
-            responseBuilder.entity(new HttpError(500,"Can't retrieve masteries. Internal error server.")).status(500);
+            responseBuilder.entity(new HttpError(500,"Can't retrieve mastery. Internal error server.")).status(500);
         }
         return responseBuilder.build();
     }

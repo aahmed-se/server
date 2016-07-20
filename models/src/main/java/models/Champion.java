@@ -1,19 +1,16 @@
 package models;
 
-import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Index;
-import org.mongodb.morphia.annotations.Indexes;
+import org.mongodb.morphia.annotations.*;
 
 import java.util.List;
 
 /**
  * Created by CLOE on 13/01/2016.
  */
-@Entity(value = "champion", noClassnameStored = true)
+@Entity(value = "champions", noClassnameStored = true)
 @Indexes(@Index("key"))
-public class Champion extends Model {
-
+public class Champion{
+    @Id
     private int id;
     private String key;
     private String name;
@@ -21,8 +18,7 @@ public class Champion extends Model {
     @Embedded
     private List<Skin> skins;
 
-    public Champion(String _id, int id, String key, String name, String title) {
-        super(_id);
+    public Champion(int id, String key, String name, String title) {
         this.id = id;
         this.key = key;
         this.name = name;
@@ -30,11 +26,6 @@ public class Champion extends Model {
     }
 
     public Champion() {
-    }
-
-    @Override
-    public Champion find() {
-        return null;
     }
 
     public double getId() {

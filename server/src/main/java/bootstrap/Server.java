@@ -11,7 +11,7 @@ import utils.Harvester;
 /**
  * Created by Thomas on 06/04/2016.
  */
-public class Server {
+public class Server{
     final static Logger log = LoggerFactory.getLogger(Server.class);
 
     public static void main(String[] args) {
