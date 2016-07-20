@@ -1,11 +1,15 @@
 package models;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import mongo.Database;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import serializers.ObjectIdSerializer;
 
 /**
  * Created by thomas on 09/04/16
@@ -14,16 +18,18 @@ import org.slf4j.LoggerFactory;
 public abstract class Model{
 
     private static final Logger log = LoggerFactory.getLogger(Model.class);
+    public final static ObjectMapper MAPPER = new ObjectMapper();
 
     @Id
-    protected String objectId;
+    protected ObjectId objectId;
 
-    public Model(){}
-    public Model(String objectId) {
-        this.objectId = objectId;
+    public Model(){this(null);}
+    public Model(ObjectId objectId) {
+        if(objectId != null) this.objectId = objectId;
+        MAPPER.registerModule(new SimpleModule("serializer").addSerializer(new ObjectIdSerializer()));
     }
 
-    public synchronized <T extends Model> String save(){
+    public synchronized <T extends Model> ObjectId save(){
         String collection = this.getClass().getAnnotation(Entity.class).value();
         if(collection != null){
             if(objectId == null){
@@ -31,7 +37,7 @@ public abstract class Model{
             }
 
             Key<T> key = (Key<T>) Database.get().getDatastore().save(this);
-            if(objectId == null && key != null) objectId =(String) key.getId();
+            if(objectId == null && key != null) objectId =  new ObjectId(key.getId().toString());
 
             return objectId;
         }
@@ -44,7 +50,7 @@ public abstract class Model{
                 .get((T) this);
     }
 
-    public String getObjectId() {
+    public ObjectId getObjectId() {
         return objectId;
     }
 }

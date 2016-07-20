@@ -33,6 +33,7 @@ public class Database {
         mongoClient = new MongoClient(CONFIG.getString("database.address"));
         database = mongoClient.getDatabase(CONFIG.getString("database.name"));
         datastore = morphia.createDatastore(mongoClient, CONFIG.getString("database.name"));
+        datastore.ensureIndexes();
     }
 
     public Morphia getMorphia() {

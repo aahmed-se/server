@@ -4,7 +4,7 @@ import models.Region;
 import models.Summoner;
 
 /**
- * Created by Maxime on 26/12/2015.
+ * Created by Kaylleur on 26/12/2015.
  */
 public class SummonerResponse extends Response{
 

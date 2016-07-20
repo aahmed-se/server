@@ -10,3 +10,4 @@ test_amqp.iml
 */target/
 *.iml
 log
+server.conf

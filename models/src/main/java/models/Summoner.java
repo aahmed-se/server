@@ -1,13 +1,14 @@
 package models;
 
 import mongo.Database;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import responses.SummonerResponse;
 
 /**
- * Created by CLOE on 13/01/2016.
+ * Created by Kaylleur on 13/01/2016.
  */
 @Entity(value = "summoner", noClassnameStored = true)
 public class Summoner extends Model {
@@ -26,7 +27,7 @@ public class Summoner extends Model {
     public Summoner() {
     }
 
-    public Summoner(String _id, long id, String name, long profileIconId, int summonerLevel, long revisionDate, Region region) {
+    public Summoner(ObjectId _id, long id, String name, long profileIconId, int summonerLevel, long revisionDate, Region region) {
         super(_id);
         this.id = id;
         this.name = name;

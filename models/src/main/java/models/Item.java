@@ -3,9 +3,9 @@ package models;
 import org.mongodb.morphia.annotations.Entity;
 
 /**
- * Created by CLOE on 13/01/2016.
+ * Created by Kaylleur on 13/01/2016.
  */
-@Entity("item")
+@Entity(value = "item",noClassnameStored = true)
 public class Item extends Model{
 
     private double id;

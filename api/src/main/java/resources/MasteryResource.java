@@ -9,13 +9,15 @@ import models.Mastery;
 import mongo.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import utils.HttpError;
+import utils.HttpResponse;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
+import static models.Model.MAPPER;
 
 /**
  * Created by thomas on 21/05/16.
@@ -27,7 +29,6 @@ public class MasteryResource {
 
     private static final Logger log = LoggerFactory.getLogger(MasteryResource.class);
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
 
 
     @GET
@@ -48,7 +49,7 @@ public class MasteryResource {
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
 
-            responseBuilder.entity(new HttpError(500,"Can't retrieve masteries. Internal error server.")).status(500);
+            responseBuilder.entity(new HttpResponse(500,"Can't retrieve masteries. Internal error server.")).status(500);
         }
         return responseBuilder.build();
     }
@@ -64,13 +65,13 @@ public class MasteryResource {
         Response.ResponseBuilder responseBuilder = Response.ok();
         try {
             Mastery mastery = Database.get().getDatastore().find(Mastery.class).filter("id = ", id).get();
-            if(mastery == null) responseBuilder.entity(new HttpError(404,"Mastery not found")).status(404);
+            if(mastery == null) responseBuilder.entity(new HttpResponse(404,"Mastery not found")).status(404);
             else responseBuilder.entity(MAPPER.writeValueAsString(mastery));
         }catch (Exception e){
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
 
-            responseBuilder.entity(new HttpError(500,"Can't retrieve mastery. Internal error server.")).status(500);
+            responseBuilder.entity(new HttpResponse(500,"Can't retrieve mastery. Internal error server.")).status(500);
         }
         return responseBuilder.build();
     }

@@ -3,9 +3,9 @@ package models;
 import org.mongodb.morphia.annotations.Entity;
 
 /**
- * Created by CLOE on 13/01/2016.
+ * Created by Kaylleur on 13/01/2016.
  */
-@Entity("summonerSpell")
+@Entity(value = "summonerSpell",noClassnameStored = true)
 public class SummonerSpell extends Model {
 
     private String name;

@@ -5,7 +5,7 @@ import org.mongodb.morphia.annotations.*;
 import java.util.List;
 
 /**
- * Created by CLOE on 13/01/2016.
+ * Created by Kaylleur on 13/01/2016.
  */
 @Entity(value = "champions", noClassnameStored = true)
 @Indexes(@Index("key"))

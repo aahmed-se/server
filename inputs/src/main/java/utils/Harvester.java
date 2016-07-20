@@ -1,6 +1,7 @@
 package utils;
 
 import models.Model;
+import models.User;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class Harvester implements Runnable {
             try {
                 Model model = getNextModel();
                 if(model != null){
-                    String id = model.save();
+                    ObjectId id = model.save();
                     log.debug("Model {} save into id {}", model,id);
                 }else{
                     wait();

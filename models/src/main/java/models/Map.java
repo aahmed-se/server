@@ -1,7 +1,7 @@
 package models;
 
 /**
- * Created by CLOE on 13/01/2016.
+ * Created by Kaylleur on 13/01/2016.
  */
 public class Map {
 

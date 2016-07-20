@@ -19,7 +19,7 @@
         <dependency>
             <groupId>org.mongodb.morphia</groupId>
             <artifactId>morphia</artifactId>
-            <version>1.1.1</version>
+            <version>${morphia.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ynov.laboDev</groupId>
@@ -27,5 +27,14 @@
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
     </dependencies>
+
+    <properties>
+        <morphia.version>1.1.1</morphia.version>
+    </properties>
 </project>

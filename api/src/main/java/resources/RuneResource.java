@@ -9,7 +9,7 @@ import models.Rune;
 import mongo.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import utils.HttpError;
+import utils.HttpResponse;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,8 +25,6 @@ import javax.ws.rs.core.Response;
 @Produces("application/json")
 public class RuneResource {
     private static final Logger log = LoggerFactory.getLogger(RuneResource.class);
-
-    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @GET
     @ApiOperation(value = "Get all runes", response = Rune[].class)
@@ -47,7 +45,7 @@ public class RuneResource {
             if(log.isDebugEnabled()) e.printStackTrace();
             log.error(e.getMessage());
         }
-        return Response.ok().entity(new HttpError(500,"Can't retrieve runes. Internal server Error.")).status(500).build();
+        return Response.ok().entity(new HttpResponse(500,"Can't retrieve runes. Internal server Error.")).status(500).build();
     }
 
     @GET

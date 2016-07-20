@@ -5,9 +5,9 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 /**
- * Created by CLOE on 13/01/2016.
+ * Created by Kaylleur on 13/01/2016.
  */
-@Entity("runes")
+@Entity(value = "runes", noClassnameStored = true)
 public class Rune{
     @Id
     private long id;
