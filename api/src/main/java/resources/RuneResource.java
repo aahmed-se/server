@@ -1,6 +1,5 @@
 package resources;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -16,6 +15,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
+import static models.Model.MAPPER;
 
 /**
  * Created by thomas on 21/05/16.
@@ -58,13 +59,13 @@ public class RuneResource {
         Response.ResponseBuilder responseBuilder = Response.ok();
         try {
             Rune rune = Database.get().getDatastore().find(Rune.class).filter("id = ", id).get();
-            if(rune == null) responseBuilder.entity(new HttpError(404,"Mastery not found")).status(404);
+            if(rune == null) responseBuilder.entity(new HttpResponse(404,"Mastery not found")).status(404);
             else responseBuilder.entity(MAPPER.writeValueAsString(rune));
         }catch (Exception e){
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());
 
-            responseBuilder.entity(new HttpError(500,"Can't retrieve rune. Internal error server.")).status(500);
+            responseBuilder.entity(new HttpResponse(500,"Can't retrieve rune. Internal error server.")).status(500);
         }
         return responseBuilder.build();
     }

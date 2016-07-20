@@ -8,18 +8,21 @@ import org.mongodb.morphia.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
-import java.util.*;
+import java.util.Properties;
 
 import static conf.Configuration.CONFIG;
 
 /**
  * Created by to116676 on 01/06/2016.
  */
-@Entity(value = "resetPassword", noClassnameStored = true)
+@Entity(value = "resetPasswords", noClassnameStored = true)
 public class ResetPassword extends Model{
 
     private static final Logger log = LoggerFactory.getLogger(ResetPassword.class);
@@ -50,19 +53,6 @@ public class ResetPassword extends Model{
         //sendMail();
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public Long getDate() {
-        return date;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-
     private static String generateKey(){
         String key = "";
         int length = Configuration.CONFIG.getInt("user.keyLength");
@@ -77,6 +67,18 @@ public class ResetPassword extends Model{
         if(resetPassword != null) key = generateKey();
 
         return key;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public Long getDate() {
+        return date;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     private void sendMail()throws Exception{

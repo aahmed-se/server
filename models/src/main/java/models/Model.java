@@ -17,9 +17,8 @@ import serializers.ObjectIdSerializer;
 @Entity(noClassnameStored = true)
 public abstract class Model{
 
-    private static final Logger log = LoggerFactory.getLogger(Model.class);
     public final static ObjectMapper MAPPER = new ObjectMapper();
-
+    private static final Logger log = LoggerFactory.getLogger(Model.class);
     @Id
     protected ObjectId objectId;
 

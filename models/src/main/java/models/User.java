@@ -10,14 +10,14 @@ import static conf.Configuration.CONFIG;
 /**
  * Created by Kaylleur on 27/01/2016.
  */
-@Entity(value = "user",noClassnameStored = true)
+@Entity(value = "users",noClassnameStored = true)
 public class User extends Model {
 
+    private static final String BEFORE = CONFIG.getString("user.salting.before");
+    private static final String AFTER = CONFIG.getString("user.salting.after");
     private String login;
     private String password;
     private String email;
-    private static final String BEFORE = CONFIG.getString("user.salting.before");
-    private static final String AFTER = CONFIG.getString("user.salting.after");
 
     public User(){}
 

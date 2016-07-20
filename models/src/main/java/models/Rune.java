@@ -46,10 +46,9 @@ public class Rune{
 @Embedded
 class SubRune {
 
-    public SubRune() {
-    }
-
     public boolean isRune;
     public String tier;
     public String type;
+    public SubRune() {
+    }
 }

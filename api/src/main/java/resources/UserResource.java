@@ -113,6 +113,11 @@ public class UserResource {
     @POST
     @Path("requestPassword")
     @Consumes("application/json")
+    @ApiOperation(value = "Create a forgotten password request.", response = ForgottenPasswordResponse.class)
+    @ApiResponses(value={
+            @ApiResponse(code = 404, message = "User not found with email."),
+            @ApiResponse(code = 500, message = "Unable to create a forgotten request.")
+    })
     public Response createResetRequest(UserForgottenPasswordRequest forgottenPasswordRequest){
         try {
             User user = Database.get().getDatastore().find(User.class).field("email").equal(forgottenPasswordRequest.email).get();
@@ -134,6 +139,12 @@ public class UserResource {
 
     @GET
     @Path("requestPassword/{key}")
+    @ApiOperation(value = "Check the validity of a forgotten password request.", response = HttpResponse.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "The timestamp has expired. Recreate another one."),
+            @ApiResponse(code = 404, message = "Request not found."),
+            @ApiResponse(code = 500, message = "Cannot verify the request.")
+    })
     public Response validResetRequest(@PathParam("key") String key){
         try {
             Query<ResetPassword> passwordQuery = Database.get().getDatastore().find(ResetPassword.class).filter("key =",key);
@@ -155,6 +166,13 @@ public class UserResource {
     @POST
     @Path("updatePassword")
     @Consumes("application/json")
+    @ApiOperation(value = "Update a password", response = HttpResponse.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "The timestamp has expired."),
+            @ApiResponse(code = 400, message = "Passwords seems to be different or/and are same of the old password."),
+            @ApiResponse(code = 500, message = "Cannot update your password. Try again later.")
+
+    })
     public Response updatePassword(UpdatePasswordRequest updatePasswordRequest){
         try {
             //search the request

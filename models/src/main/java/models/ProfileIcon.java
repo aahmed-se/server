@@ -5,7 +5,7 @@ import org.mongodb.morphia.annotations.Entity;
 /**
  * Created by Kaylleur on 13/01/2016.
  */
-@Entity(value = "profileIcon",noClassnameStored = true)
+@Entity(value = "profileIcons",noClassnameStored = true)
 public class ProfileIcon extends Model{
 
     private int id;

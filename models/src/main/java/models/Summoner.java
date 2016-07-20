@@ -10,7 +10,7 @@ import responses.SummonerResponse;
 /**
  * Created by Kaylleur on 13/01/2016.
  */
-@Entity(value = "summoner", noClassnameStored = true)
+@Entity(value = "summoners", noClassnameStored = true)
 public class Summoner extends Model {
 
     private static final Logger log = LoggerFactory.getLogger(Summoner.class);

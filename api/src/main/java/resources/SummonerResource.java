@@ -1,6 +1,5 @@
 package resources;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import models.Region;
 import models.Summoner;
@@ -47,7 +46,7 @@ public class SummonerResource {
             if(log.isDebugEnabled())e.printStackTrace();
             log.warn(e.getMessage());
 
-            responseBuilder.entity(new HttpError(400,"Bad id inserted, waited object id.")).status(500);
+            responseBuilder.entity(new HttpResponse(400,"Bad id inserted, waited object id.")).status(500);
         }catch (Exception e){
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());

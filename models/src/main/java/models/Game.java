@@ -30,18 +30,6 @@ public class Game extends Model{
     private Map<String, Integer> stats;
     private Team teamId;
 
-    @Override
-    public Game find() {
-        return null;
-    }
-
-    @Embedded
-    public class Player{
-        public Player(){}
-        public int championId;
-        public long summonerId;
-        public int teamId;
-    }
     public Game(){
     }
 
@@ -62,7 +50,6 @@ public class Game extends Model{
         this.stats = stats;
         this.teamId = teamId;
     }
-
     public Game(ObjectId _id, long id, int championId, long endGame, List<Player> fellowPlayers, GameMode gameMode, String gameType, GameSubType gameSubType, boolean invalid, int ipEarned, int level, double gameId, SummonerSpell spell1, SummonerSpell spell2, Map<String, Integer> stats, Team teamId) {
         super(_id);
         this.id = id;
@@ -98,6 +85,11 @@ public class Game extends Model{
                 response.spell2,
                 response.stats,
                 response.teamId);
+    }
+
+    @Override
+    public Game find() {
+        return null;
     }
 
     public long getId() {
@@ -158,5 +150,13 @@ public class Game extends Model{
 
     public Team getTeamId() {
         return teamId;
+    }
+
+    @Embedded
+    public class Player{
+        public int championId;
+        public long summonerId;
+        public int teamId;
+        public Player(){}
     }
 }

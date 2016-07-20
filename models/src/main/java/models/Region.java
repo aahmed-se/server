@@ -13,5 +13,5 @@ public enum Region {
     na,
     oce,
     tr,
-    ru;
+    ru
 }

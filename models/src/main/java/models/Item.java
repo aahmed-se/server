@@ -1,21 +1,23 @@
 package models;
 
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
 /**
  * Created by Kaylleur on 13/01/2016.
  */
-@Entity(value = "item",noClassnameStored = true)
-public class Item extends Model{
+@Entity(value = "items",noClassnameStored = true)
+public class Item {
 
-    private double id;
+    @Id
+    private long id;
     private String name;
     private String group;
     private String description;
     private String plainText;
 
 
-    public Item(double id, String name, String group, String description, String plainText) {
+    public Item(long id, String name, String group, String description, String plainText) {
         this.id = id;
         this.name = name;
         this.group = group;
@@ -23,11 +25,11 @@ public class Item extends Model{
         this.plainText = plainText;
     }
 
-    public double getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -63,8 +65,4 @@ public class Item extends Model{
         this.plainText = plainText;
     }
 
-    @Override
-    public Item find() {
-        return null;
-    }
 }

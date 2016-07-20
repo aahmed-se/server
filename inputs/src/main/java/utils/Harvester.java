@@ -1,7 +1,6 @@
 package utils;
 
 import models.Model;
-import models.User;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

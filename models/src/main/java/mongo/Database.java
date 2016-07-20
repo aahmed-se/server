@@ -6,6 +6,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import static conf.Configuration.CONFIG;
 /**
  * Created by Thomas 29/10/2015.
@@ -21,10 +22,6 @@ public class Database {
     private MongoDatabase database;
     private Datastore datastore;
 
-    public static Database get() {
-        return ourInstance;
-    }
-
     private Database() {
 
         morphia = new Morphia();
@@ -34,6 +31,10 @@ public class Database {
         database = mongoClient.getDatabase(CONFIG.getString("database.name"));
         datastore = morphia.createDatastore(mongoClient, CONFIG.getString("database.name"));
         datastore.ensureIndexes();
+    }
+
+    public static Database get() {
+        return ourInstance;
     }
 
     public Morphia getMorphia() {

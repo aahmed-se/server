@@ -5,7 +5,7 @@ import org.mongodb.morphia.annotations.Entity;
 /**
  * Created by Kaylleur on 13/01/2016.
  */
-@Entity(value = "summonerSpell",noClassnameStored = true)
+@Entity(value = "summonerSpells",noClassnameStored = true)
 public class SummonerSpell extends Model {
 
     private String name;

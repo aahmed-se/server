@@ -9,18 +9,17 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import static conf.Configuration.CONFIG;
 /**
  * Created by Thomas on 19/11/2015.
  */
 public class Amqp {
-    private static final Logger log = LoggerFactory.getLogger(Amqp.class);
-
     public final static String QUEUE_TASK_HIGH = "tasks_"+ Priority.HIGH;
     public final static String QUEUE_TASK_MEDIUM = "tasks_"+ Priority.MEDIUM;
     public final static String QUEUE_TASK_LOW = "tasks_"+ Priority.LOW;
     public final static String QUEUE_MODEL = "models";
-
+    private static final Logger log = LoggerFactory.getLogger(Amqp.class);
     //Singleton
     public static Amqp instance;
 
