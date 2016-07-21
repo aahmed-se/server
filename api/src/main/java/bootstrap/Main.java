@@ -8,6 +8,7 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.CORSResponseFilter;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,10 +19,9 @@ import static conf.Configuration.CONFIG;
  */
 public class Main {
 
-    final static Logger log = LoggerFactory.getLogger(Main.class);
-
     // Base URI the Grizzly HTTP server will listen on
     public static final String BASE_URI = "http://" + CONFIG.getString("api.address") + CONFIG.getString("api.port") + CONFIG.getString("api.basePath");
+    final static Logger log = LoggerFactory.getLogger(Main.class);
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
@@ -32,6 +32,7 @@ public class Main {
         // in resources package
 //        final ResourceConfig rc = new ResourceConfig().packages("resources","io.swagger.jaxrs.listing");
         final ResourceConfig rc = new ResourceConfig().packages("resources","io.swagger.jaxrs.listing");
+        rc.register(CORSResponseFilter.class);
 
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setVersion("1.0.0");
