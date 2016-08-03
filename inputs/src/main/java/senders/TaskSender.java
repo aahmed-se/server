@@ -1,19 +1,11 @@
 package senders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
-import models.Priority;
-import models.Region;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tasks.SummonerTask;
 import utils.Amqp;
-import tasks.Task;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Thomas on 20/11/2015.
@@ -26,7 +18,7 @@ public class TaskSender {
         Amqp amqp = Amqp.get();
         Channel channel = amqp.getChannel();
         ObjectMapper mapper = new ObjectMapper();
-
+/*
         Config ids = ConfigFactory.load("ids.json");
 
             List<? extends Config> idsConfigList= ids.getConfigList("ids");
@@ -64,7 +56,11 @@ public class TaskSender {
         if(na.size()>0) {
             task = new Task(SummonerTask.getSummoners(Region.na, na.toArray(new Integer[na.size()])), Priority.LOW);
             channel.basicPublish("", Amqp.QUEUE_TASK_LOW, null, mapper.writeValueAsBytes(task));
-        }
+        }*/
+
+
+        AMQP.BasicProperties props = new AMQP.BasicProperties().builder().messageId("test").build();
+        channel.basicPublish("", Amqp.QUEUE_TASK_LOW,props,"testString".getBytes());
 
         System.exit(0);
     }

@@ -1,0 +1,32 @@
+amqp:
+    image: rabbitmq:3-management
+    restart: always
+    volumes:
+        - /opt/rabbitmq
+    ports:
+        - 5672:5672
+        - 15672:15672
+    environment:
+        - RABBITMQ_DEFAULT_USER=collectorUser
+        - RABBITMQ_DEFAULT_PASS=BigDataAmqp
+        - RABBITMQ_DEFAULT_VHOST=collectorQueue
+mongodb:
+    image: mongo:latest
+    restart: always
+    volumes:
+        - /opt/mongodb
+    ports:
+        - 27017:27017
+        - 28017:28017
+mongoweb:
+   image: knickers/mongo-express:latest
+   restart: always
+   volumes: 
+       - /opt/mongoweb
+   ports:
+       - 8081:8081
+   environment:
+       - ME_CONFIG_BAISCAUTH_USERNAME=admin
+       - ME_CONFIG_BASICAUTH_PASSWORD=
+   links:
+       - mongodb

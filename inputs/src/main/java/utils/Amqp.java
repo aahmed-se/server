@@ -32,8 +32,8 @@ public class Amqp {
 
     private Amqp() throws Exception {
         uri = "amqp://" + CONFIG.getString("amqp.address") + ":" + CONFIG.getString("amqp.port") + "/" + CONFIG.getString("amqp.vhost");
-        username = CONFIG.getString("amqp.sent.login");
-        password = CONFIG.getString("amqp.sent.password");
+        username = CONFIG.getString("amqp.user.login");
+        password = CONFIG.getString("amqp.user.password");
 
         //initialize channel
         factory = new ConnectionFactory();
