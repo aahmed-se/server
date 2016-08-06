@@ -5,7 +5,6 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import responses.SummonerResponse;
 
 /**
  * Created by Kaylleur on 13/01/2016.
@@ -47,10 +46,6 @@ public class Summoner extends Model {
         this.region = region;
     }
 
-    public Summoner(SummonerResponse response){
-        this(response.id,response.name,response.profileIconId,response.summonerLevel,response.revisionDate,response.region);
-    }
-
     public double getId() {
         return id;
     }
@@ -61,6 +56,10 @@ public class Summoner extends Model {
 
     public String getName() {
         return name;
+    }
+
+    public Region getRegion() {
+        return region;
     }
 
     public void setName(String name) {
@@ -89,6 +88,10 @@ public class Summoner extends Model {
 
     public void setRevisionDate(long revisionDate) {
         this.revisionDate = revisionDate;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
     }
 
     @Override

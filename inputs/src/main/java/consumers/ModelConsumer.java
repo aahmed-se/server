@@ -4,12 +4,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.rabbitmq.client.*;
-import models.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import responses.Response;
 import utils.Amqp;
-import utils.Harvester;
+import utils.AmqpQueues;
 
 import java.io.IOException;
 
@@ -25,7 +24,7 @@ public class ModelConsumer extends DefaultConsumer{
     private ModelConsumer(Channel channel ) throws Exception {
         super(channel);
         try {
-            channel.basicConsume(Amqp.QUEUE_MODEL,true,this);
+            channel.basicConsume(AmqpQueues.QUEUE_MODEL_SUMMONER,true,this);
         } catch (IOException e) {
             if(log.isDebugEnabled()) e.printStackTrace();
             log.error(e.getMessage());
@@ -61,16 +60,16 @@ public class ModelConsumer extends DefaultConsumer{
     }
 
     public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-        log.debug("New messages incoming on {}", Amqp.QUEUE_MODEL);
+        log.debug("New messages incoming on {}", AmqpQueues.QUEUE_MODEL_SUMMONER);
         ObjectMapper mapper = new ObjectMapper();
         try {
             JsonNode node = mapper.readValue(body, ObjectNode.class);
             Class<? extends Response> responseClass = (Class<? extends Response>) Class.forName(node.get("class").asText());
             Response response = mapper.readValue(node.get("object").asText(), responseClass);
             log.debug("Object receive : {} from {}", response, responseClass);
-            Model model = response.castToModel();
+//            Model model = response.castToModel();
 
-            Harvester.get().addModel(model);
+//            Harvester.get().addModel(model);
         } catch (Exception e) {
             if(log.isDebugEnabled())e.printStackTrace();
             log.error(e.getMessage());

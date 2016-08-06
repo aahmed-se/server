@@ -15,10 +15,6 @@ import static conf.Configuration.CONFIG;
  * Created by Thomas on 19/11/2015.
  */
 public class Amqp {
-    public final static String QUEUE_TASK_HIGH = "tasks_"+ Priority.HIGH;
-    public final static String QUEUE_TASK_MEDIUM = "tasks_"+ Priority.MEDIUM;
-    public final static String QUEUE_TASK_LOW = "tasks_"+ Priority.LOW;
-    public final static String QUEUE_MODEL = "models";
     private static final Logger log = LoggerFactory.getLogger(Amqp.class);
     //Singleton
     public static Amqp instance;
@@ -46,15 +42,15 @@ public class Amqp {
         Map<String, Object> args = new HashMap<>();
 
         args.put("x-max-priority", Priority.HIGH.getIndex());
-        channel.queueDeclare(Amqp.QUEUE_TASK_HIGH,false,false,false,args);
+        channel.queueDeclare(AmqpQueues.QUEUE_TASK_HIGH,false,false,false,args);
 
         args.put("x-max-priority", Priority.MEDIUM.getIndex());
-        channel.queueDeclare(Amqp.QUEUE_TASK_MEDIUM,false,false,false,args);
+        channel.queueDeclare(AmqpQueues.QUEUE_TASK_MEDIUM,false,false,false,args);
 
         args.put("x-max-priority", Priority.LOW.getIndex());
-        channel.queueDeclare(Amqp.QUEUE_TASK_LOW,false,false,false,args);
+        channel.queueDeclare(AmqpQueues.QUEUE_TASK_LOW,false,false,false,args);
 
-        channel.queueDeclare(Amqp.QUEUE_MODEL,false,false,false,null);
+        channel.queueDeclare(AmqpQueues.QUEUE_MODEL_SUMMONER,false,false,false,null);
 
         instance = this;
     }

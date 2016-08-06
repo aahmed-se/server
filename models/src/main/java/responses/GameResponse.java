@@ -25,9 +25,5 @@ public class GameResponse extends Response{
     public SummonerSpell spell2;
     public Map<String, Integer> stats;
     public Team teamId;
-    
-    @Override
-    public Game castToModel() {
-        return new Game(this);
-    }
+
 }

@@ -59,6 +59,6 @@ public class Main {
                 Main.BASE_URI,
                 Main.BASE_URI.replace("api","api-docs"));
         System.in.read();
-        server.stop();
+        server.shutdown();
     }
 }

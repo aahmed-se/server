@@ -1,11 +1,15 @@
 package senders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
+import models.Priority;
+import models.Region;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tasks.SummonerTask;
+import tasks.Task;
 import utils.Amqp;
+import utils.AmqpQueues;
 
 /**
  * Created by Thomas on 20/11/2015.
@@ -59,8 +63,7 @@ public class TaskSender {
         }*/
 
 
-        AMQP.BasicProperties props = new AMQP.BasicProperties().builder().messageId("test").build();
-        channel.basicPublish("", Amqp.QUEUE_TASK_LOW,props,"testString".getBytes());
+        channel.basicPublish("", AmqpQueues.QUEUE_TASK_LOW,null,mapper.writeValueAsString(new Task(SummonerTask.getSummoners(Region.euw,1), Priority.LOW)).getBytes());
 
         System.exit(0);
     }
